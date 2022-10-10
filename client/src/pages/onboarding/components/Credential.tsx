@@ -1,5 +1,5 @@
 import type { CredentialData } from '../../../slices/types'
-import type { CredentialExchangeRecord } from '@aries-framework/core'
+import type { CredentialExchangeRecord } from '../../../utils/Aries'
 
 import { motion } from 'framer-motion'
 import React from 'react'

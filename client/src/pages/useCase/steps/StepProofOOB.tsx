@@ -1,7 +1,7 @@
 import type { Entity, RequestedCredential, Step } from '../../../slices/types'
-import type { ProofRecord } from '@aries-framework/core'
+import type { ProofRecord } from '../../../utils/Aries'
 
-import { ProofEventTypes } from '@aries-framework/core'
+import { ProofEventTypes } from '../../../utils/Aries'
 import { AnimatePresence, motion } from 'framer-motion'
 import React, { useEffect } from 'react'
 import { FiExternalLink } from 'react-icons/fi'

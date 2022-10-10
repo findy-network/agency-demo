@@ -1,4 +1,4 @@
-import type { ConnectionRecord, CredentialExchangeRecord, ProofRecord } from '@aries-framework/core'
+import type { ConnectionRecord, CredentialExchangeRecord, ProofRecord } from '../utils/Aries'
 
 import { useEffect } from 'react'
 

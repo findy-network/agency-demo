@@ -1,7 +1,7 @@
 import type { Entity, RequestedCredential, Step } from '../../../slices/types'
-import type { ProofRecord } from '@aries-framework/core'
+import type { ProofRecord } from '../../../utils/Aries'
 
-import { ProofEventTypes } from '@aries-framework/core'
+import { ProofEventTypes } from '../../../utils/Aries'
 import { motion } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
 
@@ -25,6 +25,7 @@ export interface Props {
 
 export const StepProof: React.FC<Props> = ({ proof, step, connectionId, requestedCredentials, entity }) => {
   const dispatch = useAppDispatch()
+  //console.log(proof?.state)
   const proofReceived = proof?.state === 'presentation-received'
 
   const [isFailedRequestModalOpen, setIsFailedRequestModalOpen] = useState(false)

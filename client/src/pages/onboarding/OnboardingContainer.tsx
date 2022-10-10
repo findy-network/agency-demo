@@ -1,5 +1,5 @@
 import type { Character } from '../../slices/types'
-import type { CredentialExchangeRecord } from '@aries-framework/core'
+import type { CredentialExchangeRecord } from '../../utils/Aries'
 
 import { AnimatePresence, motion } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
@@ -15,7 +15,6 @@ import { clearConnection } from '../../slices/connection/connectionSlice'
 import { clearCredentials } from '../../slices/credentials/credentialsSlice'
 import { completeOnboarding, nextOnboardingStep, prevOnboardingStep } from '../../slices/onboarding/onboardingSlice'
 import { fetchAllUseCasesByCharId } from '../../slices/useCases/useCasesThunks'
-import { trackEvent } from '../../utils/Analytics'
 import { OnboardingContent, Progress } from '../../utils/OnboardingUtils'
 
 import { CharacterContent } from './components/CharacterContent'
@@ -66,11 +65,6 @@ export const OnboardingContainer: React.FC<Props> = ({
 
   const addOnboardingProgress = () => {
     dispatch(nextOnboardingStep())
-    trackEvent('onboarding-step-completed', {
-      props: {
-        step: onboardingStep.toString(),
-      },
-    })
   }
 
   const removeOnboardingProgress = () => {

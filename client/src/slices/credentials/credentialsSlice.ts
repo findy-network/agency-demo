@@ -1,4 +1,4 @@
-import type { CredentialExchangeRecord } from '@aries-framework/core'
+import type { CredentialExchangeRecord } from '../../utils/Aries'
 import type { SerializedError } from '@reduxjs/toolkit'
 
 import { createSlice } from '@reduxjs/toolkit'

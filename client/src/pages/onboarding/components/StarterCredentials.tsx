@@ -1,7 +1,7 @@
 import type { CredentialData } from '../../../slices/types'
-import type { CredReqMetadata } from 'indy-sdk'
+import type { CredReqMetadata } from '../../dashboard/components/UseCaseContainer'
 
-import { CredentialExchangeRecord, JsonTransformer } from '@aries-framework/core'
+import { CredentialExchangeRecord } from '../../../utils/Aries'
 import { motion } from 'framer-motion'
 import React from 'react'
 
@@ -28,9 +28,9 @@ export const StarterCredentials: React.FC<Props> = ({ credentialData, credential
       </div>
       {credentialData.map((item) => {
         const state = credentials.find((x) => {
-          const y = JsonTransformer.fromJSON(x, CredentialExchangeRecord)
+          const y = x
           return (
-            y.metadata.get<CredReqMetadata>('_internal/indyCredential')?.credentialDefinitionId ===
+            y.metadata['_internal/indyCredential']?.credentialDefinitionId ===
             item.credentialDefinitionId
           )
         })?.state

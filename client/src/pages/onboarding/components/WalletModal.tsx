@@ -62,22 +62,31 @@ export const WalletModal: React.FC<Props> = ({ isWalletModalOpen, setIsWalletMod
                       <QRCode size={164} value={wallet.url} />
                     </div>
                   </div>
-                  <div className="mt-3 pl-2 sm:mt-0 sm:ml-4 text-left">
-                    <h2 className="text-lg leading-loose font-medium">1. Download the {wallet.name}</h2>
-                    <div className="mt-2">
-                      <p className="text-sm">
-                        You can scan the QR-code or click the button to your favorite download store below.
-                      </p>
+                  {wallet.apple && wallet.android ? (
+                    <div className="mt-3 pl-2 sm:mt-0 sm:ml-4 text-left">
+                      <h2 className="text-lg leading-loose font-medium">1. Download the {wallet.name}</h2>
+                      <div className="mt-2">
+                        <p className="text-sm">
+                          You can scan the QR-code or click the button to your favorite download store below.
+                        </p>
+                      </div>
+                      <div className="flex flex-row my-2 mb-4 justify-center sm:justify-start">
+                        <a href={wallet.apple} target="_blank" rel="noreferrer">
+                          <img className="h-8 m-2" src={appStore} alt="app-store" />
+                        </a>
+                        <a href={wallet.android} target="_blank" rel="noreferrer">
+                          <img className="h-8 m-2" src={playStore} alt="play-store" />
+                        </a>
+                      </div>
                     </div>
-                    <div className="flex flex-row my-2 mb-4 justify-center sm:justify-start">
-                      <a href={wallet.apple} target="_blank" rel="noreferrer">
-                        <img className="h-8 m-2" src={appStore} alt="app-store" />
-                      </a>
-                      <a href={wallet.android} target="_blank" rel="noreferrer">
-                        <img className="h-8 m-2" src={playStore} alt="play-store" />
-                      </a>
+                  ) : (
+                    <div className="mt-3 pl-2 sm:mt-0 sm:ml-4 text-left">
+                      <h2 className="text-lg leading-loose font-medium">1. Activate your {wallet.name}</h2>
+                      <div className="mt-2">
+                        <p className="text-sm">Scan the QR-code or open {wallet.url} with your mobile device.</p>
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </div>
               </div>
               {wallet.ledgerImage && (

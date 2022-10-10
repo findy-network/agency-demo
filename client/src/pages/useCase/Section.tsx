@@ -1,6 +1,6 @@
 import type { ConnectionState } from '../../slices/connection/connectionSlice'
 import type { Section as ISection, StepperItem } from '../../slices/types'
-import type { CredentialExchangeRecord, ProofRecord } from '@aries-framework/core'
+import type { CredentialExchangeRecord, ProofRecord } from '../../utils/Aries'
 
 import { AnimatePresence, motion } from 'framer-motion'
 import React, { useEffect, useState } from 'react'

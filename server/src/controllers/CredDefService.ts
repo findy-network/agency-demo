@@ -1,16 +1,26 @@
-import type { CredDef } from 'indy-sdk'
+import { agencyv1, AgentClient } from '@findy-network/findy-common-ts'
 
-import { Agent } from '@aries-framework/core'
-import { Inject, Service } from 'typedi'
+import { Service } from 'typedi'
+
+interface CredDef {
+  id: string
+  schemaId: string
+  type: string
+  tag: string
+  value: {
+    primary: Record<string, unknown>
+    revocation?: unknown | undefined
+  }
+  ver: string
+}
 
 @Service()
 export class CredDefService {
-  @Inject()
-  private agent: Agent
+  private agencyAgent: AgentClient
   private credentialDefinitions: CredDef[] = []
 
-  public constructor(agent: Agent) {
-    this.agent = agent
+  public constructor(agencyConnection: AgentClient) {
+    this.agencyAgent = agencyConnection
     this.init()
   }
 
@@ -32,10 +42,12 @@ export class CredDefService {
   }
 
   public async getAllCredentialsByConnectionId(connectionId: string) {
-    const credentials = await this.agent.credentials.getAll()
-    const filtered = credentials.filter((cred) => cred.connectionId === connectionId)
+    console.log('GET ALL CREDENTIALS ' + connectionId)
+    // const credentials = await this.agent.credentials.getAll()
+    // const filtered = credentials.filter((cred) => cred.connectionId === connectionId)
 
-    return filtered.map((c) => c.toJSON())
+    // return filtered.map((c) => c.toJSON())
+    return []
   }
 
   private async init() {
@@ -155,12 +167,26 @@ export class CredDefService {
     supportRevocation: boolean
     tag: string
   }) {
-    const schema = await this.agent.ledger.getSchema(credentialDefinitionRequest.schemaId)
+    console.log('Creating cred def for schema ID', credentialDefinitionRequest.schemaId)
+    const msg = new agencyv1.CredDefCreate()
+    msg.setSchemaid(credentialDefinitionRequest.schemaId)
+    msg.setTag(credentialDefinitionRequest.tag)
 
-    return await this.agent.ledger.registerCredentialDefinition({
-      schema,
-      supportRevocation: credentialDefinitionRequest.supportRevocation,
+    const res = await this.agencyAgent.createCredDef(msg)
+    console.log('Cred def created', res.getId())
+
+    const schemaId = res.getId().substring(0, res.getId().lastIndexOf(':'))
+    const credDef = {
+      ver: '1.0',
+      id: res.getId(),
+      schemaId: schemaId.substring(schemaId.lastIndexOf(':') + 1, schemaId.length),
+      type: 'CL',
       tag: credentialDefinitionRequest.tag,
-    })
+      value: {
+        primary: {},
+      },
+    }
+    console.log(credDef)
+    return credDef
   }
 }

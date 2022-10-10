@@ -1,4 +1,4 @@
-import type { ProofAttribute, ProofPredicateInfo } from '@aries-framework/core'
+import type { ProofAttribute, ProofPredicateInfo } from '../utils/Aries'
 
 export interface Connection {
   id: string

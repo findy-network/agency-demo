@@ -1,6 +1,6 @@
 import type { Event } from '../types/event'
 
-import { ConnectionEventTypes, DidExchangeState } from '@aries-framework/core'
+import { ConnectionEventTypes, DidExchangeState } from '../../client/src/utils/Aries'
 
 import { isConnectionEvent } from '../config/event'
 import { webSocketConfig } from '../config/websocket'

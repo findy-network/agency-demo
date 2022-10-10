@@ -1,7 +1,6 @@
 import type { CredentialData, RequestedCredential, UseCase } from '../../../slices/types'
-import type { CredReqMetadata } from 'indy-sdk'
+import type { CredentialExchangeRecord } from '../../../utils/Aries'
 
-import { CredentialExchangeRecord, JsonTransformer } from '@aries-framework/core'
 import { motion } from 'framer-motion'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -9,6 +8,8 @@ import { useNavigate } from 'react-router-dom'
 import { dashboardSub, dashboardTitle, rowContainer } from '../../../FramerAnimations'
 
 import { UseCaseItem } from './UseCaseItem'
+
+export type CredReqMetadata = Record<string, unknown>
 
 export interface Props {
   useCases: UseCase[]
@@ -34,8 +35,7 @@ export const UseCaseContainer: React.FC<Props> = ({ useCases, completedUseCaseSl
     const isLocked = !Object.values(requiredCredentials).every((x) =>
       issuedCredentials
         .map((y) => {
-          const z = JsonTransformer.fromJSON(y, CredentialExchangeRecord)
-          return z.metadata.get<CredReqMetadata>('_internal/indyCredential')?.credentialDefinitionId
+          return y.metadata['_internal/indyCredential']?.credentialDefinitionId
         })
         .includes(x.credentialDefinitionId)
     )

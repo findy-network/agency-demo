@@ -21,7 +21,7 @@
     "client:build": "yarn workspace client build && yarn licenses:report",
     "server:dev": "yarn workspace server dev",
     "server:build": "yarn workspace server build",
-    "dev": "concurrently -n 'client,server,testAgent' -c 'green.bold,red.bold,blue.bold' 'yarn client:start' 'yarn server:dev' 'yarn workspace server dev:agent' ",
+    "dev": "concurrently -n 'client,server' -c 'green.bold,red.bold' 'yarn client:start' 'yarn server:dev'",
     "test": "yarn run cypress open",
     "build": "yarn workspace client build && yarn workspace server build",
     "cy:open": "cypress open",

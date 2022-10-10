@@ -51,7 +51,7 @@ export const MainSection: React.FC = () => {
           variants={fade}
           whileHover={buttonHover}
           className="bg-white dark:bg-black text-black dark:text-white py-3 px-5 mx-8 mt-4 rounded-lg font-semibold shadow-sm dark:shadow-none select-none "
-          onClick={() => window.open('https://animo.id', '_blank')}
+          onClick={() => window.open('https://findy-network.github.io', '_blank')}
         >
           Get to know us &nbsp;
           <FiExternalLink className="inline h-6 pb-1" />

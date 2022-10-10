@@ -8,7 +8,6 @@ import { fadeX } from '../../../FramerAnimations'
 import { useAppDispatch } from '../../../hooks/hooks'
 import { useDarkMode } from '../../../hooks/useDarkMode'
 import { setCharacter } from '../../../slices/characters/charactersSlice'
-import { trackEvent } from '../../../utils/Analytics'
 import { prependApiUrl } from '../../../utils/Url'
 import { StepInformation } from '../components/StepInformation'
 
@@ -24,11 +23,6 @@ export const PickCharacter: React.FC<Props> = ({ content, currentCharacter, char
 
   const CharacterClickHandler = (char: Character) => {
     dispatch(setCharacter(char))
-    trackEvent('character-selected', {
-      props: {
-        character: char.name,
-      },
-    })
   }
 
   const renderCharacters = characters.map((char: Character) => {

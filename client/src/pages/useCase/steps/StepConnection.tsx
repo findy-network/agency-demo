@@ -1,8 +1,8 @@
 import type { ConnectionState } from '../../../slices/connection/connectionSlice'
 import type { Entity, Step } from '../../../slices/types'
-import type { ConnectionRecord } from '@aries-framework/core'
+import type { ConnectionRecord } from '../../../utils/Aries'
 
-import { ConnectionEventTypes } from '@aries-framework/core'
+import { ConnectionEventTypes } from '../../../utils/Aries'
 import { motion } from 'framer-motion'
 import React, { useEffect } from 'react'
 import { FiExternalLink } from 'react-icons/fi'

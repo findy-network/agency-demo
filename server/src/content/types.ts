@@ -140,7 +140,7 @@ export interface Wallet {
   recommended: boolean
   icon: string
   url: string
-  apple: string
-  android: string
+  apple?: string
+  android?: string
   ledgerImage?: string
 }

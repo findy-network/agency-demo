@@ -1,5 +1,5 @@
 import type { Attribute, Entity, RequestedCredential } from '../../../slices/types'
-import type { ProofRecord } from '@aries-framework/core'
+import type { ProofRecord } from '../../../utils/Aries'
 
 import React, { useEffect, useState } from 'react'
 
