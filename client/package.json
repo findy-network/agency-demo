@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "license": "Apache-2.0",
-  "description": "Animo Solutions - Verifiable Credential Demo",
+  "description": "Findy Agency - Verifiable Credential Demo",
   "dependencies": {
     "@aries-framework/core": "^0.2.3",
     "@reduxjs/toolkit": "^1.7.2",
