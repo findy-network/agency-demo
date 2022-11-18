@@ -79,7 +79,6 @@
     "zlib"
   ],
   "packageAllowlist": [
-    "callsite",
-    "stackframe"
+    "only"
   ]
 }
