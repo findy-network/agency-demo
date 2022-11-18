@@ -15,10 +15,10 @@
   "scripts": {
     "check-types": "yarn workspaces run tsc --noEmit -p tsconfig.json",
     "prettier": "prettier '**/*.+(js|json|ts|md|yml|yaml)'",
-    "lint": "eslint --ignore-path .gitignore .",
+    "lint": "echo \"$(cat .gitignore)\" > .eslintignore && echo tools >> .eslintignore && eslint .",
     "format": "yarn prettier --write",
     "client:start": "yarn workspace client start",
-    "client:build": "yarn workspace client build",
+    "client:build": "yarn workspace client build && yarn licenses:report",
     "server:dev": "yarn workspace server dev",
     "server:build": "yarn workspace server build",
     "dev": "concurrently -n 'client,server,testAgent' -c 'green.bold,red.bold,blue.bold' 'yarn client:start' 'yarn server:dev' 'yarn workspace server dev:agent' ",
