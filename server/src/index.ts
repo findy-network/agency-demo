@@ -15,7 +15,7 @@ import { CredDefService } from './controllers/CredDefService'
 import { TestLogger } from './utils/logger'
 
 const logger = new TestLogger(2) // debug
-const socketServer = new Server({ noServer: true })
+const socketServer = new Server({ noServer: true, path: "/ws" })
 
 process.on('unhandledRejection', (error) => {
   if (error instanceof Error) {
@@ -141,7 +141,9 @@ const run = async () => {
   })
 
   app.use((req, res, next) => {
-    console.log('REQUEST:', req.path, req.query)
+    if (req.path !== '/') {
+      console.log('REQUEST:', req.path, req.query)
+    }
     next()
   })
 

@@ -1,6 +1,5 @@
 name: release
 on:
-  workflow_dispatch:
   push:
     tags:
       - "*"
@@ -32,7 +31,7 @@ jobs:
 
       - uses: docker/build-push-action@v3
         with:
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           push: true
           tags: |
             ghcr.io/${{ github.repository_owner }}/agency-demo:${{ env.version }}
@@ -42,16 +41,16 @@ jobs:
           context: ./
           file: ./Dockerfile
 
-  # merge:
-  #   needs: push-image
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: checkout
-  #       uses: actions/checkout@v2
-  #       with:
-  #         ref: master
-  #     - name: merge
-  #       run: |
-  #         git fetch --tags origin
-  #         git merge $GITHUB_REF
-  #         git push origin master
+  merge:
+    needs: push-image
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+        with:
+          ref: master
+      - name: merge
+        run: |
+          git fetch --tags origin
+          git merge $GITHUB_REF
+          git push origin master

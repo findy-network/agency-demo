@@ -92,7 +92,7 @@ export const MainSection: React.FC = () => {
           Try demo &nbsp;
           <FiArrowRight className="inline h-6 pb-1" />
         </motion.button>
-        <a href="https://animo.id" target="_blank">
+        <a href="https://findy-network.github.io" target="_blank">
           <motion.button
             variants={fadeDelay}
             whileHover={buttonHover}

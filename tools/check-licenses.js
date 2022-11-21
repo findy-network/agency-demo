@@ -71,7 +71,7 @@ const scan = async (packageJsonPath, reportPath) => {
 
 ;(async () => {
   if (process.argv[2] === 'report') {
-    await scan('./frontend/package.json', process.argv[2] === 'report' && './client/build/licenses.txt')
+    await scan('./client/package.json', process.argv[2] === 'report' && './client/build/licenses.txt')
   } else {
     await scan('./server/package.json')
     await scan('./client/package.json')
