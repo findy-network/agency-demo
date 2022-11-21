@@ -1,30 +1,31 @@
-# FROM node:16.8.0 as build
+FROM node:16.18-alpine3.16 as build
 
-# WORKDIR /app
+WORKDIR /usr/src/app
 
-# COPY package.json .
-# COPY yarn.lock .
-# COPY client/package.json client/package.json
+COPY package*.json .
+COPY server/package*.json ./server/
 
-# RUN yarn install
+RUN yarn install
 
-# COPY client client
+COPY ./server/. ./server/.
+COPY . .
 
-# WORKDIR /app/client
+ENV NODE_ENV production
 
-# RUN yarn build
+RUN yarn server:build
 
-# FROM nginx 
+FROM node:16.18-alpine3.16
 
-# COPY ./client/build /usr/share/nginx/html
+WORKDIR /usr/src/app
 
-# EXPOSE 80
+COPY server/package*.json .
 
-FROM node:16.8.0 as client
+ENV NODE_ENV production
 
-WORKDIR /client
+RUN yarn install --production
 
-FROM nginx
-COPY --from=client /client /var/www/html
+COPY --from=build /usr/src/app/server/build /usr/src/app/build
 
-EXPOSE 80
+EXPOSE 5000
+
+CMD ["node", "build/index.js"]
