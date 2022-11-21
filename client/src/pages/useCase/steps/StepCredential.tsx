@@ -1,8 +1,6 @@
 import type { Attribute, CredentialData, Step } from '../../../slices/types'
-import type { ProofRecord } from '@aries-framework/core'
-import type { CredReqMetadata } from 'indy-sdk'
+import type { CredentialExchangeRecord, ProofRecord } from '../../../utils/Aries'
 
-import { CredentialEventTypes, JsonTransformer, CredentialExchangeRecord } from '@aries-framework/core'
 import { AnimatePresence, motion } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
 
@@ -13,7 +11,7 @@ import { Loader } from '../../../components/Loader'
 import { useAppDispatch } from '../../../hooks/hooks'
 import { fetchCredentialEventByConnectionId } from '../../../slices/credentials/credentialsSlice'
 import { deleteCredentialById, issueCredential } from '../../../slices/credentials/credentialsThunks'
-import { trackEvent } from '../../../utils/Analytics'
+import { CredentialEventTypes } from '../../../utils/Aries'
 import { getAttributesFromProof } from '../../../utils/ProofUtils'
 import { Credential } from '../../onboarding/components/Credential'
 import { FailedRequestModal } from '../../onboarding/components/FailedRequestModal'
@@ -58,7 +56,6 @@ export const StepCredential: React.FC<Props> = ({ step, connectionId, issueCrede
     // issue credentials
     credentialData.forEach((item) => {
       dispatch(issueCredential({ connectionId: connectionId, cred: item }))
-      trackEvent('credential-issued')
     })
   }
 
@@ -83,11 +80,8 @@ export const StepCredential: React.FC<Props> = ({ step, connectionId, issueCrede
         dispatch(deleteCredentialById(cred.id))
 
         const newCredential = issuedCredData.find((item) => {
-          const credClass = JsonTransformer.fromJSON(cred, CredentialExchangeRecord)
-          return (
-            item.credentialDefinitionId ===
-            credClass.metadata.get<CredReqMetadata>('_internal/indyCredential')?.credentialDefinitionId
-          )
+          const credClass = cred
+          return item.credentialDefinitionId === credClass.metadata['_internal/indyCredential']?.credentialDefinitionId
         })
         if (newCredential) dispatch(issueCredential({ connectionId: connectionId, cred: newCredential }))
       }
@@ -99,11 +93,8 @@ export const StepCredential: React.FC<Props> = ({ step, connectionId, issueCrede
     .slice()
     .map((cred, idx) => {
       const data = issueCredentials.find((item) => {
-        const credClass = JsonTransformer.fromJSON(cred, CredentialExchangeRecord)
-        return (
-          item.credentialDefinitionId ===
-          credClass.metadata.get<CredReqMetadata>('_internal/indyCredential')?.credentialDefinitionId
-        )
+        const credClass = cred
+        return item.credentialDefinitionId === credClass.metadata['_internal/indyCredential']?.credentialDefinitionId
       })
       if (data) return <Credential key={cred.id} title={`Credential ${idx + 1}`} credential={cred} data={data} />
     })

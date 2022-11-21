@@ -1,4 +1,4 @@
-import type { ProofRecord } from '@aries-framework/core'
+import type { ProofRecord } from '../../utils/Aries'
 
 import { createSlice } from '@reduxjs/toolkit'
 

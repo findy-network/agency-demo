@@ -14,7 +14,6 @@ import { usePreferences } from '../../slices/preferences/preferencesSelectors'
 import { setDemoCompleted } from '../../slices/preferences/preferencesSlice'
 import { useAllUseCases } from '../../slices/useCases/useCasesSelectors'
 import { fetchAllUseCasesByCharId } from '../../slices/useCases/useCasesThunks'
-import { trackEvent } from '../../utils/Analytics'
 import { Footer } from '../landing/components/Footer'
 import { NavBar } from '../landing/components/Navbar'
 
@@ -50,10 +49,14 @@ export const DashboardPage: React.FC = () => {
 
   const dashboardCard = (
     <DashboardCard
-      title="Get to know Animo."
-      info="We’ve a lot more going on than just this (awesome) demo and we would love to discuss self-sovereign identity with you. Get in touch!"
+      title="Get to know Findy Agency."
+      info="Findy Agency - the number one open-source identity agency solution."
       button={
-        <SmallButtonText text="CONTACT" onClick={() => window.open('https://animo.id', '_blank')} disabled={false} />
+        <SmallButtonText
+          text="CONTACT"
+          onClick={() => window.open('https://findy-network.github.io', '_blank')}
+          disabled={false}
+        />
       }
     />
   )
@@ -68,13 +71,6 @@ export const DashboardPage: React.FC = () => {
   const completeDemo = () => {
     navigate('/')
     dispatch({ type: 'demo/resetDemo' })
-
-    if (currentCharacter)
-      trackEvent('demo-character-completed', {
-        props: {
-          character: currentCharacter.name,
-        },
-      })
   }
 
   return (

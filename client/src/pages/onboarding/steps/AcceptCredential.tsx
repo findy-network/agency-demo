@@ -1,8 +1,7 @@
 import type { Character } from '../../../slices/types'
+import type { CredentialExchangeRecord } from '../../../utils/Aries'
 import type { Content } from '../../../utils/OnboardingUtils'
-import type { CredReqMetadata } from 'indy-sdk'
 
-import { CredentialEventTypes, CredentialExchangeRecord, JsonTransformer } from '@aries-framework/core'
 import { AnimatePresence, motion } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -16,7 +15,7 @@ import { useAppDispatch } from '../../../hooks/hooks'
 import { useCredentials } from '../../../slices/credentials/credentialsSelectors'
 import { fetchCredentialEventByConnectionId } from '../../../slices/credentials/credentialsSlice'
 import { deleteCredentialById, issueCredential } from '../../../slices/credentials/credentialsThunks'
-import { trackEvent } from '../../../utils/Analytics'
+import { CredentialEventTypes } from '../../../utils/Aries'
 import { FailedRequestModal } from '../components/FailedRequestModal'
 import { StarterCredentials } from '../components/StarterCredentials'
 import { StepInformation } from '../components/StepInformation'
@@ -50,7 +49,6 @@ export const AcceptCredential: React.FC<Props> = ({ content, connectionId, crede
     if (credentials.length === 0) {
       currentCharacter.starterCredentials.forEach((item) => {
         dispatch(issueCredential({ connectionId: connectionId, cred: item }))
-        trackEvent('credential-issued')
       })
       setCredentialsIssued(true)
     }
@@ -104,11 +102,8 @@ export const AcceptCredential: React.FC<Props> = ({ content, connectionId, crede
         dispatch(deleteCredentialById(cred.id))
 
         const newCredential = currentCharacter.starterCredentials.find((item) => {
-          const credClass = JsonTransformer.fromJSON(cred, CredentialExchangeRecord)
-          return (
-            item.credentialDefinitionId ===
-            credClass.metadata.get<CredReqMetadata>('_internal/indyCredential')?.credentialDefinitionId
-          )
+          const credClass = cred
+          return item.credentialDefinitionId === credClass.metadata['_internal/indyCredential']?.credentialDefinitionId
         })
 
         if (newCredential) dispatch(issueCredential({ connectionId: connectionId, cred: newCredential }))

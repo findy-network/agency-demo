@@ -1,4 +1,4 @@
-import type { ConnectionRecord } from '@aries-framework/core'
+import type { ConnectionRecord } from '../../utils/Aries'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
 import { createSlice } from '@reduxjs/toolkit'

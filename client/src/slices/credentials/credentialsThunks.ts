@@ -1,6 +1,6 @@
 import type { AsyncThunkOptions } from '../../store/configureStore'
+import type { CredentialExchangeRecord } from '../../utils/Aries'
 import type { CredentialData } from '../types'
-import type { CredentialExchangeRecord } from '@aries-framework/core'
 
 import { createAsyncThunk } from '@reduxjs/toolkit'
 

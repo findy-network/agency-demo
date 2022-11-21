@@ -20,7 +20,7 @@ export const WalletItem: React.FC<Props> = ({ icon, name, organization, recommen
       variants={rowFadeX}
     >
       <div className="flex h-12 w-12 my-2 mx-2 md:mx-8 p-1">
-        <img className="rounded-lg" src={prependApiUrl(icon)} alt="wallet-icon" />
+        <img className="rounded-lg" src={icon.startsWith('http') ? icon : prependApiUrl(icon)} alt="wallet-icon" />
       </div>
       <div className="flex flex-1 flex-col dark:text-white text-lg">
         <div className="flex flex-1 font-medium	 dark:text-white text-lg">

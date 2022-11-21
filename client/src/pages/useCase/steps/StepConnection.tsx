@@ -1,8 +1,7 @@
 import type { ConnectionState } from '../../../slices/connection/connectionSlice'
 import type { Entity, Step } from '../../../slices/types'
-import type { ConnectionRecord } from '@aries-framework/core'
+import type { ConnectionRecord } from '../../../utils/Aries'
 
-import { ConnectionEventTypes } from '@aries-framework/core'
 import { motion } from 'framer-motion'
 import React, { useEffect } from 'react'
 import { FiExternalLink } from 'react-icons/fi'
@@ -15,6 +14,7 @@ import { useAppDispatch } from '../../../hooks/hooks'
 import { useConnection } from '../../../slices/connection/connectionSelectors'
 import { setConnection } from '../../../slices/connection/connectionSlice'
 import { createInvitation } from '../../../slices/connection/connectionThunks'
+import { ConnectionEventTypes } from '../../../utils/Aries'
 import { StepInfo } from '../components/StepInfo'
 
 export interface Props {

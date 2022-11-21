@@ -3,7 +3,6 @@ import { useEffect } from 'react'
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
 
 import { useAppDispatch } from './hooks/hooks'
-import { useAnalytics } from './hooks/useAnalytics'
 import { PageNotFound } from './pages/PageNotFound'
 import { DashboardPage } from './pages/dashboard/DashboardPage'
 import { LandingPage } from './pages/landing/LandingPage'
@@ -17,7 +16,6 @@ import { PrivateRoute } from './utils/PrivateRoute'
 import { ThemeProvider } from './utils/ThemeContext'
 
 function App() {
-  useAnalytics()
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const location = useLocation()

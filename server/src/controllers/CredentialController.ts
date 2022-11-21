@@ -1,5 +1,4 @@
-import { RecordNotFoundError } from '@aries-framework/core'
-import { Get, InternalServerError, JsonController, NotFoundError, Param } from 'routing-controllers'
+import { Get, InternalServerError, JsonController, Param } from 'routing-controllers'
 import { Inject, Service } from 'typedi'
 
 import { CredDefService } from './CredDefService'
@@ -19,9 +18,9 @@ export class CredentialController {
     try {
       return this.service.getAllCredentialsByConnectionId(connectionId)
     } catch (error) {
-      if (error instanceof RecordNotFoundError) {
-        throw new NotFoundError(`credentials for connectionId "${connectionId}" not found.`)
-      }
+      // if (error instanceof RecordNotFoundError) {
+      //   throw new NotFoundError(`credentials for connectionId "${connectionId}" not found.`)
+      // }
       throw new InternalServerError(`something went wrong: ${error}`)
     }
   }

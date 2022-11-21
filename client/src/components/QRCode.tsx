@@ -1,7 +1,5 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useMediaQuery } from 'react-responsive'
-
-import { trackEvent } from '../utils/Analytics'
 
 import { CheckMark } from './Checkmark'
 
@@ -18,10 +16,6 @@ export const QRCode: React.FC<Props> = ({ invitationUrl, connectionState }) => {
   const isLarge = useMediaQuery({ query: '(max-width: 1242px)' })
 
   const isCompleted = connectionState === 'responded' || connectionState === 'completed'
-
-  useEffect(() => {
-    if (isCompleted) trackEvent('connection-completed')
-  }, [isCompleted])
 
   const renderQRCode = invitationUrl && (
     <div className="relative m-auto rounded-lg bg-animo-lightgrey p-4">

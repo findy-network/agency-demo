@@ -2,15 +2,25 @@
 
 import type { ILogObject } from 'tslog'
 
-import { LogLevel, BaseLogger } from '@aries-framework/core'
 import { appendFileSync } from 'fs'
 import { Logger } from 'tslog'
+
+enum LogLevel {
+  test = 0,
+  trace = 1,
+  debug = 2,
+  info = 3,
+  warn = 4,
+  error = 5,
+  fatal = 6,
+  off = 7,
+}
 
 function logToTransport(logObject: ILogObject) {
   appendFileSync('logs.txt', JSON.stringify(logObject) + '\n')
 }
 
-export class TestLogger extends BaseLogger {
+export class TestLogger {
   private logger: Logger
 
   // Map our log levels to tslog levels
@@ -24,8 +34,10 @@ export class TestLogger extends BaseLogger {
     [LogLevel.fatal]: 'fatal',
   } as const
 
+  private logLevel: LogLevel
+
   public constructor(logLevel: LogLevel, name?: string) {
-    super(logLevel)
+    this.logLevel = logLevel
     this.logger = new Logger({
       name,
       minLevel: this.logLevel == LogLevel.off ? undefined : this.tsLogLevelMap[this.logLevel],

@@ -9,7 +9,6 @@ import { fadeExit } from '../../../FramerAnimations'
 import { Button } from '../../../components/Button'
 import { useAppDispatch } from '../../../hooks/hooks'
 import { useCaseCompleted } from '../../../slices/preferences/preferencesSlice'
-import { trackEvent } from '../../../utils/Analytics'
 import { prependApiUrl } from '../../../utils/Url'
 
 export interface Props {
@@ -29,11 +28,6 @@ export const EndContainer: React.FC<Props> = ({ step }) => {
       dispatch(useCaseCompleted(slug))
       dispatch({ type: 'clearUseCase' })
       navigate('/dashboard')
-      trackEvent('use-case-completed', {
-        props: {
-          useCase: slug,
-        },
-      })
     }
   }, [completed, dispatch, slug])
 
