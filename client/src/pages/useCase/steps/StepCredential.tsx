@@ -1,8 +1,6 @@
 import type { Attribute, CredentialData, Step } from '../../../slices/types'
-import type { CredReqMetadata } from '../../dashboard/components/UseCaseContainer'
-import type { ProofRecord } from '../../../utils/Aries'
+import type { CredentialExchangeRecord, ProofRecord } from '../../../utils/Aries'
 
-import { CredentialEventTypes, CredentialExchangeRecord } from '../../../utils/Aries'
 import { AnimatePresence, motion } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
 
@@ -13,6 +11,7 @@ import { Loader } from '../../../components/Loader'
 import { useAppDispatch } from '../../../hooks/hooks'
 import { fetchCredentialEventByConnectionId } from '../../../slices/credentials/credentialsSlice'
 import { deleteCredentialById, issueCredential } from '../../../slices/credentials/credentialsThunks'
+import { CredentialEventTypes } from '../../../utils/Aries'
 import { getAttributesFromProof } from '../../../utils/ProofUtils'
 import { Credential } from '../../onboarding/components/Credential'
 import { FailedRequestModal } from '../../onboarding/components/FailedRequestModal'
@@ -82,10 +81,7 @@ export const StepCredential: React.FC<Props> = ({ step, connectionId, issueCrede
 
         const newCredential = issuedCredData.find((item) => {
           const credClass = cred
-          return (
-            item.credentialDefinitionId ===
-            credClass.metadata['_internal/indyCredential']?.credentialDefinitionId
-          )
+          return item.credentialDefinitionId === credClass.metadata['_internal/indyCredential']?.credentialDefinitionId
         })
         if (newCredential) dispatch(issueCredential({ connectionId: connectionId, cred: newCredential }))
       }
@@ -98,10 +94,7 @@ export const StepCredential: React.FC<Props> = ({ step, connectionId, issueCrede
     .map((cred, idx) => {
       const data = issueCredentials.find((item) => {
         const credClass = cred
-        return (
-          item.credentialDefinitionId ===
-          credClass.metadata['_internal/indyCredential']?.credentialDefinitionId
-        )
+        return item.credentialDefinitionId === credClass.metadata['_internal/indyCredential']?.credentialDefinitionId
       })
       if (data) return <Credential key={cred.id} title={`Credential ${idx + 1}`} credential={cred} data={data} />
     })

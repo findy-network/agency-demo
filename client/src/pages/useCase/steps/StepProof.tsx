@@ -1,7 +1,6 @@
 import type { Entity, RequestedCredential, Step } from '../../../slices/types'
 import type { ProofRecord } from '../../../utils/Aries'
 
-import { ProofEventTypes } from '../../../utils/Aries'
 import { motion } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
 
@@ -11,6 +10,7 @@ import { ActionCTA } from '../../../components/ActionCTA'
 import { useAppDispatch } from '../../../hooks/hooks'
 import { fetchProofEventById } from '../../../slices/proof/proofSlice'
 import { createProof, deleteProofById } from '../../../slices/proof/proofThunks'
+import { ProofEventTypes } from '../../../utils/Aries'
 import { FailedRequestModal } from '../../onboarding/components/FailedRequestModal'
 import { ProofAttributesCard } from '../components/ProofAttributesCard'
 import { StepInfo } from '../components/StepInfo'

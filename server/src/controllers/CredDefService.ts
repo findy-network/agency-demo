@@ -1,5 +1,4 @@
 import { agencyv1, AgentClient } from '@findy-network/findy-common-ts'
-
 import { Service } from 'typedi'
 
 interface CredDef {
@@ -41,12 +40,7 @@ export class CredDefService {
     return this.credentialDefinitions
   }
 
-  public async getAllCredentialsByConnectionId(connectionId: string) {
-    console.log('GET ALL CREDENTIALS ' + connectionId)
-    // const credentials = await this.agent.credentials.getAll()
-    // const filtered = credentials.filter((cred) => cred.connectionId === connectionId)
-
-    // return filtered.map((c) => c.toJSON())
+  public async getAllCredentialsByConnectionId(_: string) {
     return []
   }
 

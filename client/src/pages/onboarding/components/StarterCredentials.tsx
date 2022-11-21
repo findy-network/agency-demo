@@ -1,7 +1,6 @@
 import type { CredentialData } from '../../../slices/types'
-import type { CredReqMetadata } from '../../dashboard/components/UseCaseContainer'
+import type { CredentialExchangeRecord } from '../../../utils/Aries'
 
-import { CredentialExchangeRecord } from '../../../utils/Aries'
 import { motion } from 'framer-motion'
 import React from 'react'
 
@@ -29,10 +28,7 @@ export const StarterCredentials: React.FC<Props> = ({ credentialData, credential
       {credentialData.map((item) => {
         const state = credentials.find((x) => {
           const y = x
-          return (
-            y.metadata['_internal/indyCredential']?.credentialDefinitionId ===
-            item.credentialDefinitionId
-          )
+          return y.metadata['_internal/indyCredential']?.credentialDefinitionId === item.credentialDefinitionId
         })?.state
 
         const completed = state === 'credential-issued' || state === 'done'

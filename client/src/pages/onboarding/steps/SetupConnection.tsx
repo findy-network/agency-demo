@@ -1,8 +1,7 @@
 /* eslint-disable no-console */
-import type { Content } from '../../../utils/OnboardingUtils'
 import type { ConnectionRecord } from '../../../utils/Aries'
+import type { Content } from '../../../utils/OnboardingUtils'
 
-import { ConnectionEventTypes } from '../../../utils/Aries'
 import { motion } from 'framer-motion'
 import React, { useEffect } from 'react'
 import { FiExternalLink } from 'react-icons/fi'
@@ -18,6 +17,7 @@ import { setConnection } from '../../../slices/connection/connectionSlice'
 import { createInvitation } from '../../../slices/connection/connectionThunks'
 import { setOnboardingConnectionId } from '../../../slices/onboarding/onboardingSlice'
 import { setConnectionDate } from '../../../slices/preferences/preferencesSlice'
+import { ConnectionEventTypes } from '../../../utils/Aries'
 import { StepInformation } from '../components/StepInformation'
 
 export interface Props {

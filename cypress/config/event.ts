@@ -1,5 +1,5 @@
-import type { Event } from '../types/event'
 import type { ConnectionStateChangedEvent } from '../../client/src/utils/Aries'
+import type { Event } from '../types/event'
 
 import { ConnectionEventTypes } from '../../client/src/utils/Aries'
 

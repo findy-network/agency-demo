@@ -78,7 +78,5 @@
     "xnet",
     "zlib"
   ],
-  "packageAllowlist": [
-    "only"
-  ]
+  "packageAllowlist": ["only"]
 }

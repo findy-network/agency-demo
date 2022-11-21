@@ -1,7 +1,6 @@
 import type { Entity, RequestedCredential, Step } from '../../../slices/types'
 import type { ProofRecord } from '../../../utils/Aries'
 
-import { ProofEventTypes } from '../../../utils/Aries'
 import { AnimatePresence, motion } from 'framer-motion'
 import React, { useEffect } from 'react'
 import { FiExternalLink } from 'react-icons/fi'
@@ -12,6 +11,7 @@ import { useWebhookEvent } from '../../../api/Webhook'
 import { useAppDispatch } from '../../../hooks/hooks'
 import { fetchProofEventById } from '../../../slices/proof/proofSlice'
 import { createProofOOB } from '../../../slices/proof/proofThunks'
+import { ProofEventTypes } from '../../../utils/Aries'
 import { ProofAttributesCard } from '../components/ProofAttributesCard'
 import { StepInfo } from '../components/StepInfo'
 

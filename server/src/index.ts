@@ -1,19 +1,18 @@
-import 'reflect-metadata';
-import { Express, json } from 'express'
-
-import { createAcator, openGRPCConnection, agencyv1 } from '@findy-network/findy-common-ts'
-import { v4 as uuidv4 } from 'uuid'
-
-import { static as stx } from 'express'
-import { createExpressServer, useContainer } from 'routing-controllers'
-import { Container } from 'typedi'
+import type { Express } from 'express'
 import type { Socket } from 'net'
 
+import 'reflect-metadata'
+
+import { createAcator, openGRPCConnection, agencyv1 } from '@findy-network/findy-common-ts'
+import { json, static as stx } from 'express'
+import { createExpressServer, useContainer } from 'routing-controllers'
+import { Container } from 'typedi'
+import { v4 as uuidv4 } from 'uuid'
 import { Server } from 'ws'
 
+import { sendWebSocketEvent } from './WebSocketEvents'
 import { CredDefService } from './controllers/CredDefService'
 import { TestLogger } from './utils/logger'
-import { sendWebSocketEvent } from './WebSocketEvents'
 
 const logger = new TestLogger(2) // debug
 const socketServer = new Server({ noServer: true })
@@ -30,18 +29,18 @@ process.on('unhandledRejection', (error) => {
 
 const setupFindyAgency = async () => {
   const acatorProps = {
-    authUrl: process.env.AGENCY_AUTH_URL!,
-    authOrigin: process.env.AGENCY_AUTH_ORIGIN!,
-    userName: process.env.AGENCY_USER_NAME!,
-    seed: process.env.AGENCY_PUBLIC_DID_SEED!,
-    key: process.env.AGENCY_KEY!,
+    authUrl: process.env.AGENCY_AUTH_URL || '',
+    authOrigin: process.env.AGENCY_AUTH_ORIGIN || '',
+    userName: process.env.AGENCY_USER_NAME || '',
+    seed: process.env.AGENCY_PUBLIC_DID_SEED || '',
+    key: process.env.AGENCY_KEY || '',
   }
   const authenticator = createAcator(acatorProps)
 
   const grpcProps = {
-    serverAddress: process.env.SERVER_ADDRESS!,
-    serverPort: parseInt(process.env.SERVER_PORT!, 10),
-    certPath: process.env.SERVER_CERT_PATH!,
+    serverAddress: process.env.SERVER_ADDRESS || '',
+    serverPort: parseInt(process.env.SERVER_PORT || '', 10),
+    certPath: process.env.SERVER_CERT_PATH || '',
   }
 
   // Authenticate and open GRPC connection to agency
@@ -102,7 +101,7 @@ const run = async () => {
           ?.getAttributesList()
           .map((attr) => ({ name: attr.getName(), value: attr.getValue() }))
       },
-      PresentProofDone: (info, data) => {
+      PresentProofDone: (info) => {
         proofsDone[info.protocolId].status = 'done'
         sendWebSocketEvent(socketServer, {
           type: 'ProofStateChanged',
@@ -149,7 +148,7 @@ const run = async () => {
   app.post('/oob/create-legacy-invitation', async (req, res) => {
     const id = uuidv4().toString()
     const msg = new agencyv1.InvitationBase()
-    msg.setLabel(req.body.label || "Demo Government")
+    msg.setLabel(req.body.label || 'Demo Government')
     msg.setId(id)
 
     const invitation = await agentClient.createInvitation(msg)
@@ -171,7 +170,7 @@ const run = async () => {
     res.json(foundConnections)
   })
 
-  app.post('/credentials/offer-credential', async (req, res, next) => {
+  app.post('/credentials/offer-credential', async (req, res) => {
     const attributes = new agencyv1.Protocol.IssuingAttributes()
     req.body.credentialFormats.indy.attributes.map((item: { name: string; value: string }) => {
       const attr = new agencyv1.Protocol.IssuingAttributes.Attribute()
@@ -208,7 +207,7 @@ const run = async () => {
     })
   })
 
-  app.post('/proofs/request-proof', async (req, res, next) => {
+  app.post('/proofs/request-proof', async (req, res) => {
     const attributes = new agencyv1.Protocol.Proof()
 
     Object.keys(req.body.proofRequestOptions.requestedAttributes).map((item) => {
@@ -257,8 +256,9 @@ const run = async () => {
 
   const server = app.listen(5000, () => console.log('Started'))
   server.on('upgrade', (request, socket, head) => {
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    socketServer.handleUpgrade(request, socket as Socket, head, () => { })
+    socketServer.handleUpgrade(request, socket as Socket, head, () => {
+      console.log('ws upgraded')
+    })
   })
 }
 

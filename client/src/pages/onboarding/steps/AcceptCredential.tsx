@@ -1,7 +1,6 @@
 import type { Character } from '../../../slices/types'
+import type { CredentialExchangeRecord } from '../../../utils/Aries'
 import type { Content } from '../../../utils/OnboardingUtils'
-import type { CredReqMetadata } from '../../dashboard/components/UseCaseContainer'
-import  { CredentialEventTypes, CredentialExchangeRecord } from '../../../utils/Aries'
 
 import { AnimatePresence, motion } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
@@ -16,6 +15,7 @@ import { useAppDispatch } from '../../../hooks/hooks'
 import { useCredentials } from '../../../slices/credentials/credentialsSelectors'
 import { fetchCredentialEventByConnectionId } from '../../../slices/credentials/credentialsSlice'
 import { deleteCredentialById, issueCredential } from '../../../slices/credentials/credentialsThunks'
+import { CredentialEventTypes } from '../../../utils/Aries'
 import { FailedRequestModal } from '../components/FailedRequestModal'
 import { StarterCredentials } from '../components/StarterCredentials'
 import { StepInformation } from '../components/StepInformation'
@@ -103,10 +103,7 @@ export const AcceptCredential: React.FC<Props> = ({ content, connectionId, crede
 
         const newCredential = currentCharacter.starterCredentials.find((item) => {
           const credClass = cred
-          return (
-            item.credentialDefinitionId ===
-            credClass.metadata['_internal/indyCredential']?.credentialDefinitionId
-          )
+          return item.credentialDefinitionId === credClass.metadata['_internal/indyCredential']?.credentialDefinitionId
         })
 
         if (newCredential) dispatch(issueCredential({ connectionId: connectionId, cred: newCredential }))
