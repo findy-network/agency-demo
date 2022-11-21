@@ -13,7 +13,7 @@ import { Loader } from '../../../components/Loader'
 import { Modal } from '../../../components/Modal'
 import { useAppDispatch } from '../../../hooks/hooks'
 import { useCredentials } from '../../../slices/credentials/credentialsSelectors'
-import { fetchCredentialEventByConnectionId } from '../../../slices/credentials/credentialsSlice'
+import { addCredential } from '../../../slices/credentials/credentialsSlice'
 import { deleteCredentialById, issueCredential } from '../../../slices/credentials/credentialsThunks'
 import { CredentialEventTypes } from '../../../utils/Aries'
 import { FailedRequestModal } from '../components/FailedRequestModal'
@@ -84,7 +84,7 @@ export const AcceptCredential: React.FC<Props> = ({ content, connectionId, crede
     CredentialEventTypes.CredentialStateChanged,
     (event: { payload: { credentialRecord: CredentialExchangeRecord } }) => {
       if (event.payload.credentialRecord.connectionId === connectionId) {
-        dispatch(fetchCredentialEventByConnectionId(event.payload.credentialRecord))
+        dispatch(addCredential(event.payload.credentialRecord))
       }
     },
     !credentialsAccepted,
