@@ -9,13 +9,13 @@ import { useNavigate } from 'react-router-dom'
 import { fade, fadeX } from '../../../FramerAnimations'
 import { useWebhookEvent } from '../../../api/Webhook'
 import { ActionCTA } from '../../../components/ActionCTA'
-import { Loader } from '../../../components/Loader'
 import { Modal } from '../../../components/Modal'
 import { useAppDispatch } from '../../../hooks/hooks'
 import { useCredentials } from '../../../slices/credentials/credentialsSelectors'
 import { addCredential } from '../../../slices/credentials/credentialsSlice'
 import { deleteCredentialById, issueCredential } from '../../../slices/credentials/credentialsThunks'
 import { CredentialEventTypes } from '../../../utils/Aries'
+import { CredentialSkeleton } from '../components/CredentialSkeleton'
 import { FailedRequestModal } from '../components/FailedRequestModal'
 import { StarterCredentials } from '../components/StarterCredentials'
 import { StepInformation } from '../components/StepInformation'
@@ -124,7 +124,7 @@ export const AcceptCredential: React.FC<Props> = ({ content, connectionId, crede
           </AnimatePresence>
         ) : (
           <motion.div className="flex flex-col h-full m-auto">
-            <Loader />
+            <CredentialSkeleton title="Starter credentials" />
           </motion.div>
         )}
         {isFailedRequestModalOpen && (
