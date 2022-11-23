@@ -195,7 +195,7 @@ export class InfraPipelineStack extends cdk.Stack {
             value: `https://${process.env.SUB_DOMAIN_NAME}.${process.env.DOMAIN_NAME}`,
           },
           REACT_APP_HOST_WEBSOCKET: {
-            value: `wss://${process.env.SUB_DOMAIN_NAME}.${process.env.DOMAIN_NAME}`,
+            value: `wss://${process.env.SUB_DOMAIN_NAME}.${process.env.DOMAIN_NAME}/ws`,
           },
         },
       },
