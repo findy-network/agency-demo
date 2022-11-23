@@ -41,8 +41,8 @@ const preferencesSlice = createSlice({
     useCaseCompleted: (state, action: PayloadAction<string>) => {
       state.completedUseCaseSlugs.push(action.payload)
     },
-    setDemoCompleted: (state) => {
-      state.demoCompleted = true
+    setDemoCompleted: (state, action: PayloadAction<boolean>) => {
+      state.demoCompleted = action.payload
     },
     resetDashboard: (state) => {
       state.completedUseCaseSlugs = []

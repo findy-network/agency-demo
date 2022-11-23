@@ -150,7 +150,7 @@ const run = async () => {
   app.post('/oob/create-legacy-invitation', async (req, res) => {
     const id = uuidv4().toString()
     const msg = new agencyv1.InvitationBase()
-    msg.setLabel(req.body.label || 'Demo Government')
+    msg.setLabel(req.body.label || 'Demo')
     msg.setId(id)
 
     const invitation = await agentClient.createInvitation(msg)

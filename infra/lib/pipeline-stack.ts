@@ -175,10 +175,10 @@ export class InfraPipelineStack extends cdk.Stack {
     return new CodeBuildStep('FindyAgencyDemoDeployBackendStep', {
       projectName: 'FindyAgencyDemoDeployBackendStep',
       commands: [
-        //`VERSION="$(./tools/version.sh ./)-$(date +%s)"`,
-        //`aws lightsail update-container-service --service-name "agency-demo"`,
         `URL=$(aws lightsail get-container-services --service-name agency-demo --output json | jq -r '.containerServices[0].url')`,
         `aws ssm put-parameter --overwrite --name \"/agency-demo/backend-url\" --value \"$URL\" --type String`,
+        `CONTAINERS=$(aws lightsail get-container-services --service-name agency-demo --output json | jq -r '.containerServices[0].currentDeployment.containers')`,
+        `aws lightsail create-container-service-deployment --service-name agency-demo --containers $CONTAINERS`
       ],
       role: deployRole,
     })
