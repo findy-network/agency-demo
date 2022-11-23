@@ -41,7 +41,7 @@ export const DashboardPage: React.FC = () => {
 
   useEffect(() => {
     if (completedUseCaseSlugs.length !== 0 && completedUseCaseSlugs.length === useCases.length) {
-      dispatch(setDemoCompleted())
+      dispatch(setDemoCompleted(true))
     }
   }, [completedUseCaseSlugs, useCases])
 

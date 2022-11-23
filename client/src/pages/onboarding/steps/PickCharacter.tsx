@@ -8,6 +8,7 @@ import { fadeX } from '../../../FramerAnimations'
 import { useAppDispatch } from '../../../hooks/hooks'
 import { useDarkMode } from '../../../hooks/useDarkMode'
 import { setCharacter } from '../../../slices/characters/charactersSlice'
+import { resetDashboard, setDemoCompleted } from '../../../slices/preferences/preferencesSlice'
 import { prependApiUrl } from '../../../utils/Url'
 import { StepInformation } from '../components/StepInformation'
 
@@ -23,6 +24,10 @@ export const PickCharacter: React.FC<Props> = ({ content, currentCharacter, char
 
   const CharacterClickHandler = (char: Character) => {
     dispatch(setCharacter(char))
+    if (currentCharacter !== char) {
+      dispatch(setDemoCompleted(false))
+      dispatch(resetDashboard()) // reset completed use cases on character change
+    }
   }
 
   const renderCharacters = characters.map((char: Character) => {
