@@ -4,12 +4,12 @@
 
 </p>
 
-<h1 align="center"><b>Animo Self-Sovereign Identity Demo</b></h1>
+<h1 align="center"><b>Findy Agency Self-Sovereign Identity Demo</b></h1>
 <div align="center">
   
-[![Continuous Deployment](https://github.com/animo/animo-demo/actions/workflows/continuous-deployment.yml/badge.svg)](https://github.com/animo/animo-demo/actions/workflows/continuous-deployment.yml)
+[![Continuous Deployment](https://github.com/findy-network/agency-demo/actions/workflows/test.yml/badge.svg)](https://github.com/findy-network/agency-demo/actions/workflows/test.yml)
     <a
-    href="https://raw.githubusercontent.com/hyperledger/aries-framework-javascript/main/LICENSE"
+    href="https://raw.githubusercontent.com/findy-network/agency-demo/master/LICENSE"
     ><img
       alt="License"
       src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"
