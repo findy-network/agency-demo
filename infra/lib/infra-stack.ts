@@ -14,15 +14,14 @@ export class InfraStack extends Stack {
     })
 
     const apiPaths = [
-      '/agent*',
-      '/oob*',
+      '/oob/*',
       '/connections*',
-      '/credentials*',
-      '/proofs*',
-      '/demo*',
-      '/server*',
-      '/public*',
-      '/ws*',
+      '/credentials/*',
+      '/proofs/*',
+      '/demo/*',
+      '/server/last-reset',
+      '/public/*',
+      '/ws',
     ]
     const backendUrl = backend.appUrl
     new Frontend(this, `${id}-frontend`, {
