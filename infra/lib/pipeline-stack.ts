@@ -178,7 +178,8 @@ export class InfraPipelineStack extends cdk.Stack {
         `URL=$(aws lightsail get-container-services --service-name agency-demo --output json | jq -r '.containerServices[0].url')`,
         `aws ssm put-parameter --overwrite --name \"/agency-demo/backend-url\" --value \"$URL\" --type String`,
         `CONTAINERS=$(aws lightsail get-container-services --service-name agency-demo --output json | jq -r '.containerServices[0].currentDeployment.containers')`,
-        `aws lightsail create-container-service-deployment --service-name agency-demo --containers $CONTAINERS`
+        `PUBLIC_ENDPOINT=$(aws lightsail get-container-services --service-name agency-demo --output json | jq -r '.containerServices[0].currentDeployment.publicEndpoint')`,
+        `aws lightsail create-container-service-deployment --service-name agency-demo --containers "$CONTAINERS" --public-endpoint "$PUBLIC_ENDPOINT"`
       ],
       role: deployRole,
     })
