@@ -1,6 +1,5 @@
-import { Construct } from 'constructs'
-
 import * as lightsail from 'aws-cdk-lib/aws-lightsail'
+import { Construct } from 'constructs'
 
 interface BackendProps {
   readonly account: string

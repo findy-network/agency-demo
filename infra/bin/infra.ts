@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import * as cdk from 'aws-cdk-lib'
+
 import { InfraPipelineStack } from '../lib/pipeline-stack'
 
 const app = new cdk.App()
