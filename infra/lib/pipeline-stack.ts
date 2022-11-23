@@ -9,7 +9,7 @@ import { InfraPipelineStage } from './pipeline-stage'
 import { NotificationRule } from 'aws-cdk-lib/aws-codestarnotifications'
 import { Topic } from 'aws-cdk-lib/aws-sns'
 
-interface InfraPipelineProperties extends cdk.StackProps { }
+interface InfraPipelineProperties extends cdk.StackProps {}
 
 const environmentVariables: Record<string, codebuild.BuildEnvironmentVariable> = {
   DOMAIN_NAME: {

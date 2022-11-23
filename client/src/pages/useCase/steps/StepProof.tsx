@@ -8,7 +8,7 @@ import { fadeX } from '../../../FramerAnimations'
 import { useWebhookEvent } from '../../../api/Webhook'
 import { ActionCTA } from '../../../components/ActionCTA'
 import { useAppDispatch } from '../../../hooks/hooks'
-import { fetchProofEventById } from '../../../slices/proof/proofSlice'
+import { setProof } from '../../../slices/proof/proofSlice'
 import { createProof, deleteProofById } from '../../../slices/proof/proofThunks'
 import { ProofEventTypes } from '../../../utils/Aries'
 import { FailedRequestModal } from '../../onboarding/components/FailedRequestModal'
@@ -81,7 +81,7 @@ export const StepProof: React.FC<Props> = ({ proof, step, connectionId, requeste
     ProofEventTypes.ProofStateChanged,
     (event: { payload: { proofRecord: ProofRecord } }) => {
       if (event.payload.proofRecord.id === proof?.id) {
-        dispatch(fetchProofEventById(event.payload.proofRecord))
+        dispatch(setProof(event.payload.proofRecord))
       }
     },
     !proofReceived,
