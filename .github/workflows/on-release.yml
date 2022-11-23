@@ -2,7 +2,7 @@ name: release
 on:
   push:
     tags:
-      - "*"
+      - '*'
 jobs:
   push-image:
     runs-on: ubuntu-latest
