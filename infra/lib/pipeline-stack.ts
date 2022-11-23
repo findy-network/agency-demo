@@ -9,7 +9,7 @@ import { InfraPipelineStage } from './pipeline-stage'
 import { NotificationRule } from 'aws-cdk-lib/aws-codestarnotifications'
 import { Topic } from 'aws-cdk-lib/aws-sns'
 
-interface InfraPipelineProperties extends cdk.StackProps {}
+interface InfraPipelineProperties extends cdk.StackProps { }
 
 const environmentVariables: Record<string, codebuild.BuildEnvironmentVariable> = {
   DOMAIN_NAME: {
@@ -177,7 +177,7 @@ export class InfraPipelineStack extends cdk.Stack {
       commands: [
         //`VERSION="$(./tools/version.sh ./)-$(date +%s)"`,
         //`aws lightsail update-container-service --service-name "agency-demo"`,
-        `URL=$(aws lightsail get-container-services --service-name agency-demo --output json | jq '.containerServices[0].url')`,
+        `URL=$(aws lightsail get-container-services --service-name agency-demo --output json | jq -r '.containerServices[0].url')`,
         `aws ssm put-parameter --overwrite --name \"/agency-demo/backend-url\" --value \"$URL\" --type String`,
       ],
       role: deployRole,
