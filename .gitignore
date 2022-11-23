@@ -108,3 +108,8 @@ server/logs.txt
 build
 
 .eslintignore
+.envrc
+
+.cdk.staging
+cdk.out
+cdk.context.json

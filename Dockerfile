@@ -3,7 +3,9 @@ FROM node:16.18-alpine3.16 as build
 WORKDIR /usr/src/app
 
 COPY package*.json .
+COPY yarn* .
 COPY server/package*.json ./server/
+COPY server/yarn* ./server/
 
 RUN yarn install
 
@@ -19,13 +21,18 @@ FROM node:16.18-alpine3.16
 WORKDIR /usr/src/app
 
 COPY server/package*.json .
+COPY server/yarn* .
+
+# TODO: yarn not handling binaries properly, so install findy-common-ts separately
+RUN yarn install --production && \
+    yarn add @findy-network/findy-common-ts
 
 ENV NODE_ENV production
+# TODO: yarn not handling binaries properly, so modify path manually
+ENV PATH ${PATH}:/usr/src/app/node_modules/.bin
 
-RUN yarn install --production
-
-COPY --from=build /usr/src/app/server/build /usr/src/app/build
+COPY --from=build /usr/src/app/server/build /usr/src/app
 
 EXPOSE 5000
 
-CMD ["node", "build/index.js"]
+CMD ["node", "index.js"]
