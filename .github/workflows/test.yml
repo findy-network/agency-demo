@@ -2,7 +2,9 @@ name: test
 
 on:
   pull_request:
-    branches: [main]
+    branches: [dev]
+  push:
+    branches: [dev]
 
 jobs:
   cypress-run:

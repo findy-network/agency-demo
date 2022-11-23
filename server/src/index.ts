@@ -15,7 +15,7 @@ import { CredDefService } from './controllers/CredDefService'
 import { TestLogger } from './utils/logger'
 
 const logger = new TestLogger(2) // debug
-const socketServer = new Server({ noServer: true, path: "/ws" })
+const socketServer = new Server({ noServer: true, path: '/ws' })
 
 process.on('unhandledRejection', (error) => {
   if (error instanceof Error) {
