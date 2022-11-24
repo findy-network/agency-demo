@@ -116,7 +116,7 @@ export class Frontend extends Construct {
         {
           customOriginSource: {
             domainName: props.backendUrl,
-            originProtocolPolicy: OriginProtocolPolicy.HTTP_ONLY,
+            originProtocolPolicy: OriginProtocolPolicy.HTTPS_ONLY,
             originReadTimeout: Duration.seconds(60),
             originKeepaliveTimeout: Duration.seconds(60),
           },
