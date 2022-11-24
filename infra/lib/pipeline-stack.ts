@@ -109,14 +109,14 @@ export class InfraPipelineStack extends cdk.Stack {
     })
 
     // manually adjust logs retention
-    // this.node.findAll().forEach((construct, index) => {
-    //     if (construct instanceof codebuild.Project) {
-    //         new logs.LogRetention(this, `LogRetention${index}`, {
-    //             logGroupName: `/aws/codebuild/${construct.projectName}`,
-    //             retention: logs.RetentionDays.ONE_MONTH,
-    //         });
-    //     }
-    // });
+    this.node.findAll().forEach((construct, index) => {
+      if (construct instanceof codebuild.Project) {
+        new logs.LogRetention(this, `LogRetention${index}`, {
+          logGroupName: `/aws/codebuild/${construct.projectName}`,
+          retention: logs.RetentionDays.ONE_MONTH,
+        });
+      }
+    });
   }
 
   createPipeline(source: CodePipelineSource) {
