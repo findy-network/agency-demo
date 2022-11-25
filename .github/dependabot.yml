@@ -1,22 +1,22 @@
 version: 2
 updates:
   - package-ecosystem: npm
-    directory: "/"
+    directory: '/'
     schedule:
-      interval: "monthly"
-    target-branch: "dev"
+      interval: 'monthly'
+    target-branch: 'dev'
   - package-ecosystem: npm
-    directory: "/server"
+    directory: '/server'
     schedule:
-      interval: "monthly"
-    target-branch: "dev"
+      interval: 'monthly'
+    target-branch: 'dev'
   - package-ecosystem: npm
-    directory: "/client"
+    directory: '/client'
     schedule:
-      interval: "monthly"
-    target-branch: "dev"
+      interval: 'monthly'
+    target-branch: 'dev'
   - package-ecosystem: npm
-    directory: "/infra"
+    directory: '/infra'
     schedule:
-      interval: "monthly"
-    target-branch: "dev"
+      interval: 'monthly'
+    target-branch: 'dev'

@@ -17,6 +17,7 @@ import { setConnection } from '../../../slices/connection/connectionSlice'
 import { createInvitation } from '../../../slices/connection/connectionThunks'
 import { setOnboardingConnectionId } from '../../../slices/onboarding/onboardingSlice'
 import { setConnectionDate } from '../../../slices/preferences/preferencesSlice'
+import { useWallets } from '../../../slices/wallets/walletsSelectors'
 import { ConnectionEventTypes } from '../../../utils/Aries'
 import { StepInformation } from '../components/StepInformation'
 
@@ -73,16 +74,21 @@ export const SetupConnection: React.FC<Props> = ({
     </div>
   )
 
-  const deepLink = `didcomm://aries_connection_invitation?${invitationUrl?.split('?')[1]}`
   const isMobile = useMediaQuery({ query: '(max-width: 768px)' })
+  const { wallets } = useWallets()
+  const walletURL = wallets[0].url
+  const deepLink = `${walletURL}/connect/${window.btoa(invitationUrl || '')}`
 
   const renderCTA = !isCompleted ? (
     <motion.div variants={fade} key="openWallet">
       <p>
-        Scan the QR-code with your <a href={deepLink}>wallet {isMobile && 'or'} </a>
+        Scan the QR-code with your{' '}
+        <a target="_blank" rel="noopener noreferrer" href={deepLink}>
+          wallet {isMobile && 'or'}{' '}
+        </a>
       </p>
       {isMobile && (
-        <a href={deepLink} className="underline underline-offset-2 mt-2">
+        <a target="_blank" rel="noopener noreferrer" href={deepLink} className="underline underline-offset-2 mt-2">
           open in wallet
           <FiExternalLink className="inline pb-1" />
         </a>
