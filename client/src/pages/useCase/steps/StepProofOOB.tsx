@@ -86,6 +86,7 @@ export const StepProofOOB: React.FC<Props> = ({ proof, proofUrl, step, requested
     [proof]
   )
 
+  // TODO
   const deepLink = `didcomm://aries_connection_invitation?${proofUrl?.split('?')[1]}`
   const isMobile = useMediaQuery({ query: '(max-width: 768px)' })
   const isLarge = useMediaQuery({ query: '(max-width: 1242px)' })

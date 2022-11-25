@@ -9,7 +9,7 @@ import { InfraPipelineStage } from './pipeline-stage'
 import { NotificationRule } from 'aws-cdk-lib/aws-codestarnotifications'
 import { Topic } from 'aws-cdk-lib/aws-sns'
 
-interface InfraPipelineProperties extends cdk.StackProps { }
+interface InfraPipelineProperties extends cdk.StackProps {}
 
 const environmentVariables: Record<string, codebuild.BuildEnvironmentVariable> = {
   DOMAIN_NAME: {
@@ -114,9 +114,9 @@ export class InfraPipelineStack extends cdk.Stack {
         new logs.LogRetention(this, `LogRetention${index}`, {
           logGroupName: `/aws/codebuild/${construct.projectName}`,
           retention: logs.RetentionDays.ONE_MONTH,
-        });
+        })
       }
-    });
+    })
   }
 
   createPipeline(source: CodePipelineSource) {
@@ -182,7 +182,7 @@ export class InfraPipelineStack extends cdk.Stack {
         `PUBLIC_ENDPOINT=$(aws lightsail get-container-services --service-name agency-demo --output json | jq -r '.containerServices[0].currentDeployment.publicEndpoint')`,
         `aws lightsail create-container-service-deployment --service-name agency-demo --containers "$CONTAINERS" --public-endpoint "$PUBLIC_ENDPOINT"`,
         // make sure cloudfront domain is configured as public domain to ensure origin is found
-        `aws lightsail update-container-service --service-name agency-demo --public-domain-names '{"_": ["${process.env.SUB_DOMAIN_NAME}.${process.env.DOMAIN_NAME}"]}'`
+        `aws lightsail update-container-service --service-name agency-demo --public-domain-names '{"_": ["${process.env.SUB_DOMAIN_NAME}.${process.env.DOMAIN_NAME}"]}'`,
       ],
       role: deployRole,
     })
