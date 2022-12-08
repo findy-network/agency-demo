@@ -1,6 +1,6 @@
 <p align="center">
   <br />
-<img src="https://i.imgur.com/m6bVqCY.png" alt="screenshot-demo" height="600px"/>
+<img src="https://github.com/findy-network/agency-demo/blob/master/client/public/seo-logo.jpg?raw=true" alt="screenshot-demo" height="600px"/>
 
 </p>
 
@@ -20,7 +20,10 @@
 
 ## ✨ Hi there!
 
-Welcome to the repository of Animo's Self-Sovereign identity demo. This interactive app demonstrates the use of verifiable credentials. This demo is built using [Aries Framework Javascript (AFJ)](https://github.com/hyperledger/aries-framework-javascript). AFJ is a framework written in TypeScript for building SSI Agents and DIDComm services. This demo uses the REST API, which is part of the [Aries Framework JavaScript Extensions](https://github.com/hyperledger/aries-framework-javascript-ext) repository.
+Welcome to the repository of Findy Agency's Self-Sovereign identity demo. This interactive app
+demonstrates the use of verifiable credentials. This demo is built using [Findy Agency](https://findy-network.github.io).
+Findy Agency is a multitenant SSI agency. This demo is based on [Animo's]((https://animo.id))
+similar demo for Aries Javascript Framework functionality.
 
 ## 🛠️ Usage
 
@@ -55,9 +58,15 @@ cp .env.example .env
 
 | Variable                | Description                                                                                                        |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| `AGENT_PUBLIC_DID_SEED` | Used in the backend application for the agent. Should be set to your agent's public DID in development/production. |
-| `AGENT_ENDPOINT`        | Used in the backend application for the agent. Should be set to your agent's endpoint in development/production.   |
-| `AGENT_WALLET_KEY`      | Used in the backend application for the agent. Should be set to your agent's wallet key in development/production. |
+| `AGENCY_AUTH_URL` | Agency auth service URL |
+| `AGENCY_AUTH_ORIGIN`        | Agency auth service origin   |
+| `AGENCY_USER_NAME`      | Agent user name |
+| `AGENCY_PUBLIC_DID_SEED`      | Agent public DID seed |
+| `AGENCY_KEY`      | Agent authenticator key |
+| `SERVER_ADDRESS`      | Agency gRPC server address |
+| `SERVER_PORT`      | Agency gRPC server port |
+| `WALLET_URL`      | Agency web wallet URL |
+
 
 ### Node version
 
@@ -76,13 +85,3 @@ yarn install
 ```bash
 yarn dev
 ```
-
-### Tests
-
-The demo has [Cypress](https://www.cypress.io/) integration tests. To run the tests, make sure you have both the client, server and test agent running locally. You can do this by running the commands `yarn dev` in the root of the project. You can then start the tests with `yarn test`. This will open up cypress in chrome from where you can run the tests.
-
-## 🖇️ How To Contribute
-
-You're welcome to contribute to this demo. Please make sure to open an issue first!
-
-This demo is open source and you're more than welcome to customize and use it to create your own self-sovereign identity demo. If you do, an attribution to [Animo](https://animo.id) would be very much appreciated!

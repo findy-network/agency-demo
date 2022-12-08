@@ -34,7 +34,7 @@ export const UseCasePage: React.FC = () => {
   const { proof, proofUrl } = useProof()
 
   const navigate = useNavigate()
-  useTitle(`${currentUseCase?.card.title ?? 'Use case'} | Animo Self-Sovereign Identity Demo`)
+  useTitle(`${currentUseCase?.card.title ?? 'Use case'} | Findy Agency Self-Sovereign Identity Demo`)
 
   useEffect(() => {
     if (currentCharacter && slug) {
