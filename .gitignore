@@ -113,3 +113,5 @@ build
 .cdk.staging
 cdk.out
 cdk.context.json
+
+.data

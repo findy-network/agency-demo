@@ -1,8 +1,4 @@
-<p align="center">
-  <br />
-<img src="https://github.com/findy-network/agency-demo/blob/master/client/public/seo-logo.jpg?raw=true" alt="screenshot-demo" height="600px"/>
-
-</p>
+![Screenshot](https://github.com/findy-network/agency-demo/blob/master/client/public/seo-logo.jpg?raw=true)
 
 <h1 align="center"><b>Findy Agency Self-Sovereign Identity Demo</b></h1>
 <div align="center">

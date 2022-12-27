@@ -32,7 +32,7 @@ const setupFindyAgency = async () => {
     authUrl: process.env.AGENCY_AUTH_URL || '',
     authOrigin: process.env.AGENCY_AUTH_ORIGIN || '',
     userName: process.env.AGENCY_USER_NAME || '',
-    seed: process.env.AGENCY_PUBLIC_DID_SEED || '',
+    ...(process.env.AGENCY_PUBLIC_DID_SEED ? { seed: process.env.AGENCY_PUBLIC_DID_SEED } : {}),
     key: process.env.AGENCY_KEY || '',
   }
   const authenticator = createAcator(acatorProps)

@@ -1,0 +1,77 @@
+version: '3.9'
+services:
+  demo:
+    build: ..
+    environment:
+      AGENCY_AUTH_URL: 'http://auth:8888'
+      AGENCY_AUTH_ORIGIN: 'http://localhost:3000'
+      AGENCY_USER_NAME: 'Demo'
+      AGENCY_KEY: '15308490f1e4026284594dd08d31291bc8ef2aeac730d0daf6ff87bb92d4336c'
+      SERVER_ADDRESS: 'core'
+      SERVER_PORT: '50051'
+      WALLET_URL: 'http://localhost:3000'
+      SERVER_CERT_PATH: '/grpc'
+    volumes:
+      - ./config/cert:/grpc
+    ports:
+      - '5001:5000'
+    depends_on:
+      - auth
+      - core
+  core:
+    image: ghcr.io/findy-network/findy-agent:latest
+    volumes:
+      - ./config/steward.exported:/steward.exported
+      - ./config/cert:/grpc
+      - .data/agent:/root
+    environment:
+      FCLI_POOL_GENESIS_TXN_FILE: ''
+      FCLI_POOL_NAME: 'FINDY_FILE_LEDGER'
+      FCLI_AGENCY_POOL_NAME: 'FINDY_FILE_LEDGER'
+      FCLI_AGENCY_GRPC_TLS: 'true'
+      FCLI_AGENCY_GRPC_CERT_PATH: '/grpc'
+    ports:
+      - '8080:8080'
+      - '50052:50051'
+  auth:
+    image: ghcr.io/findy-network/findy-agent-auth:latest
+    volumes:
+      - ./config/cert:/grpc
+      - .data/auth:/data
+    depends_on:
+      - core
+    environment:
+      FAA_ENABLE_CORS: 'true'
+      FAA_ORIGIN: 'http://localhost:3000'
+      FAA_AGENCY_ADDR: 'core'
+    ports:
+      - '8088:8888'
+  vault:
+    image: ghcr.io/findy-network/findy-agent-vault:latest
+    volumes:
+      - ./config/cert:/grpc
+    depends_on:
+      - vault-db
+      - core
+    environment:
+      FAV_DB_PASSWORD: 'password'
+      FAV_AGENCY_HOST: 'core'
+    ports:
+      - '8085:8085'
+    restart: unless-stopped
+    entrypoint: >
+      /bin/sh -c "
+        while ! nc -z vault-db 5432;
+        do
+          echo 'wait for db';
+          sleep 1;
+        done;
+        /start.sh;
+      "
+  vault-db:
+    image: postgres:13.6-alpine
+    volumes:
+      - .data/vault:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: 'vault'
+      POSTGRES_PASSWORD: 'password'

@@ -31,7 +31,6 @@
     "licenses:check": "node ./tools/check-licenses.js "
   },
   "devDependencies": {
-    "@aries-framework/core": "^0.2.3",
     "@lensesio/cypress-websocket-testing": "^1.0.1",
     "@typescript-eslint/eslint-plugin": "^5.6.0",
     "@typescript-eslint/parser": "^5.38.1",
