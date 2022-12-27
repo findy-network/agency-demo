@@ -47,7 +47,7 @@ export class CredDefService {
 
   // TODO: these should be auto-created based on the use cases.
   private async init() {
-    const cd1 = await this.createSchemaCredentialDefinition({
+    const cd1 = this.createSchemaCredentialDefinition({
       schema: {
         attributeNames: ['Name', 'Street', 'City', 'Date of birth', 'Nationality'],
         name: 'Animo ID',
