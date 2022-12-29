@@ -5,7 +5,6 @@ WORKDIR /usr/src/app
 COPY package*.json .
 COPY yarn* .
 COPY server/package*.json ./server/
-COPY server/yarn* ./server/
 
 RUN yarn install
 
