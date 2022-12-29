@@ -75,3 +75,9 @@ services:
     environment:
       POSTGRES_DB: 'vault'
       POSTGRES_PASSWORD: 'password'
+  pwa:
+    image: ghcr.io/findy-network/findy-wallet-pwa/local:latest
+    ports:
+      - '3000:80'
+    depends_on:
+      - vault

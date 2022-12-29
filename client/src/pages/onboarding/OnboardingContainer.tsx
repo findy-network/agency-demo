@@ -237,13 +237,13 @@ export const OnboardingContainer: React.FC<Props> = ({
       className="flex flex-row h-full justify-between bg-white dark:bg-animo-darkgrey rounded-lg p-2 w-full sxl:w-5/6 shadow"
       style={style}
     >
-      <div className="flex flex-col grid justify-items-end w-full lg:w-2/3 px-8">
+      <div className="flex flex-col grid justify-items-end w-full lg:w-2/3 px-8" style={{ zIndex: 1 }}>
         <div className="w-full">
           <motion.p variants={fadeDelay}>
             <FiLogOut onClick={showLeaveModal} className="inline h-12 cursor-pointer dark:text-white" />
           </motion.p>
         </div>
-        <AnimatePresence exitBeforeEnter>{getComponentToRender(onboardingStep)}</AnimatePresence>
+        <AnimatePresence mode="wait">{getComponentToRender(onboardingStep)}</AnimatePresence>
         <OnboardingBottomNav
           onboardingStep={onboardingStep}
           addOnboardingStep={addOnboardingProgress}
@@ -254,7 +254,7 @@ export const OnboardingContainer: React.FC<Props> = ({
         />
       </div>
       <div className="bg-animo-white dark:bg-animo-black hidden lg:flex lg:w-1/3 rounded-r-lg flex-col justify-center h-full select-none">
-        <AnimatePresence exitBeforeEnter>{getImageToRender(onboardingStep)}</AnimatePresence>
+        <AnimatePresence mode="wait">{getImageToRender(onboardingStep)}</AnimatePresence>
       </div>
       {leaveModal && (
         <Modal title={LEAVE_MODAL_TITLE} description={LEAVE_MODAL_DESCRIPTION} onOk={leave} onCancel={closeLeave} />
