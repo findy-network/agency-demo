@@ -21,7 +21,6 @@ FROM node:16.18-alpine3.16
 WORKDIR /usr/src/app
 
 COPY server/package*.json .
-COPY server/yarn* .
 
 # TODO: yarn not handling binaries properly, so install findy-common-ts separately
 RUN yarn install --production && \
