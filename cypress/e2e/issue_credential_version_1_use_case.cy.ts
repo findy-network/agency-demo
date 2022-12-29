@@ -1,4 +1,4 @@
-let username = 'user-' + new Date().getTime()
+const username = 'user-' + new Date().getTime()
 let agentJWT = ''
 
 describe('Onboarding demo test using issue credential protocol version 1', () => {
