@@ -37,7 +37,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: test
     env:
-      FCLI_TLS_PATH: '$GITHUB_WORKSPACE/e2e-env/config/cert/'
+      FCLI_TLS_PATH: './e2e-env/config/cert/'
       FCLI_SERVER: 'localhost:50052'
     steps:
       - name: Checkout
