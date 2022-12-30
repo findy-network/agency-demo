@@ -67,8 +67,8 @@ jobs:
           chmod a+x install.sh
           sudo ./install.sh -b /bin
 
-      - name: Wait for credential defs to be created
-        run: sleep 60s
+      - name: Wait for frontend to start and credential defs to be created
+        run: sleep 120s
         shell: bash
 
       - name: Cypress run
