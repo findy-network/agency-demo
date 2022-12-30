@@ -115,3 +115,4 @@ cdk.out
 cdk.context.json
 
 .data
+cypress/videos

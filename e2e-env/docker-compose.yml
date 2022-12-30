@@ -11,6 +11,7 @@ services:
       SERVER_PORT: '50051'
       WALLET_URL: 'http://localhost:3000'
       SERVER_CERT_PATH: '/grpc'
+      FINDY_CTS_LOG_LEVEL: 'debug'
     volumes:
       - ./config/cert:/grpc
     ports:
