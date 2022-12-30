@@ -43,13 +43,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup NodeJS
-        uses: ./.github/actions/setup-node
-        with:
-          node-version: 16
-
-      - name: Install dependencies
-        run: yarn install
+      - name: Start env
+        run: |
+          cd e2e-env
+          docker-compose up -d
 
       - name: Install cli
         run: |
@@ -57,10 +54,13 @@ jobs:
           chmod a+x install.sh
           sudo ./install.sh -b /bin
 
-      - name: Start env
-        run: |
-          cd e2e-env
-          docker-compose up -d
+      - name: Setup NodeJS
+        uses: ./.github/actions/setup-node
+        with:
+          node-version: 16
+
+      - name: Install dependencies
+        run: yarn install
 
       - name: Start frontend
         run: |
@@ -72,3 +72,16 @@ jobs:
         timeout-minutes: 10
         with:
           browser: chrome
+
+      - name: Collect docker logs
+        if: ${{ failure() }}
+        uses: jwalton/gh-docker-logs@v2.0.2
+        with:
+          dest: './tests_output/docker-logs'
+
+      - name: archive logs
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: e2e-logs
+          path: tests_output
