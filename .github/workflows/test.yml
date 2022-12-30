@@ -43,21 +43,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Start env
-        run: |
-          cd e2e-env
-          docker-compose up -d
-
-      - name: Install cli
-        run: |
-          curl https://raw.githubusercontent.com/findy-network/findy-agent-cli/HEAD/install.sh > install.sh
-          chmod a+x install.sh
-          sudo ./install.sh -b /bin
-
       - name: Setup NodeJS
         uses: ./.github/actions/setup-node
         with:
           node-version: 16
+
+      - name: Start env
+        run: |
+          cd e2e-env
+          docker-compose up -d
 
       - name: Install dependencies
         run: yarn install
@@ -66,6 +60,12 @@ jobs:
         run: |
           yarn
           PORT=3001 REACT_APP_HOST_BACKEND=http://localhost:5001 REACT_APP_HOST_WEBSOCKET=ws://localhost:5001 yarn client:start &
+
+      - name: Install cli
+        run: |
+          curl https://raw.githubusercontent.com/findy-network/findy-agent-cli/HEAD/install.sh > install.sh
+          chmod a+x install.sh
+          sudo ./install.sh -b /bin
 
       - name: Cypress run
         uses: cypress-io/github-action@v5
