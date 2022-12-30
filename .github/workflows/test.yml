@@ -67,6 +67,10 @@ jobs:
           chmod a+x install.sh
           sudo ./install.sh -b /bin
 
+      - name: Wait for credential defs to be created
+        run: sleep 60s
+        shell: bash
+
       - name: Cypress run
         uses: cypress-io/github-action@v5
         timeout-minutes: 10
