@@ -44,6 +44,7 @@ describe('Onboarding demo test using issue credential protocol version 1', () =>
         cy.log(stdout)
       })
     })
+    cy.wait(500)
     cy.get('[data-cy=next-onboarding-step]').click()
     cy.get('circle').should('be.visible')
     cy.get('[data-cy=next-onboarding-step]').click()
