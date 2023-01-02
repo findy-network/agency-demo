@@ -59,7 +59,7 @@ const run = async () => {
   await agentClient.startListeningWithHandler(
     {
       DIDExchangeDone: (info) => {
-        console.log("New connection:", info.connectionId)
+        console.log('New connection:', info.connectionId)
         connectionsDone.push(info.connectionId)
         sendWebSocketEvent(socketServer, {
           type: 'ConnectionStateChanged',
@@ -69,7 +69,7 @@ const run = async () => {
         })
       },
       IssueCredentialDone: (info, data) => {
-        console.log("New credential:", info.protocolId)
+        console.log('New credential:', info.protocolId)
         credentialsDone[info.protocolId] = 'done'
         sendWebSocketEvent(socketServer, {
           type: 'CredentialStateChanged',
@@ -89,7 +89,7 @@ const run = async () => {
         })
       },
       PresentProofPaused: async (info, presentProof) => {
-        console.log("Proof paused:", info.protocolId)
+        console.log('Proof paused:', info.protocolId)
 
         const protocolID = new agencyv1.ProtocolID()
         protocolID.setId(info.protocolId)
@@ -106,7 +106,7 @@ const run = async () => {
           .map((attr) => ({ name: attr.getName(), value: attr.getValue() }))
       },
       PresentProofDone: (info) => {
-        console.log("New proof:", info.protocolId)
+        console.log('New proof:', info.protocolId)
 
         proofsDone[info.protocolId].status = 'done'
         sendWebSocketEvent(socketServer, {
