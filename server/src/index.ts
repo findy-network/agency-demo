@@ -8,20 +8,18 @@ import { json, static as stx } from 'express'
 import { createExpressServer, useContainer } from 'routing-controllers'
 import { Container } from 'typedi'
 import { v4 as uuidv4 } from 'uuid'
-import { Server } from 'ws'
 
-import { sendWebSocketEvent } from './WebSocketEvents'
 import { CredDefService } from './controllers/CredDefService'
-import { TestLogger } from './utils/logger'
+import { sendWebSocketEvent, createSocketServer } from './utils/WebSocket'
+import logger from './utils/logger'
 
-const logger = new TestLogger(2) // debug
-const socketServer = new Server({ noServer: true, path: '/ws' })
+const socketServer = createSocketServer()
 
 process.on('unhandledRejection', (error) => {
   if (error instanceof Error) {
-    logger.fatal(`Unhandled promise rejection: ${error.message}`, { error })
+    logger.error(`Unhandled promise rejection: ${error.message}`, { error })
   } else {
-    logger.fatal('Unhandled promise rejection due to non-error error', {
+    logger.error('Unhandled promise rejection due to non-error error', {
       error,
     })
   }
@@ -32,7 +30,7 @@ const setupFindyAgency = async () => {
     authUrl: process.env.AGENCY_AUTH_URL || '',
     authOrigin: process.env.AGENCY_AUTH_ORIGIN || '',
     userName: process.env.AGENCY_USER_NAME || '',
-    seed: process.env.AGENCY_PUBLIC_DID_SEED || '',
+    ...(process.env.AGENCY_PUBLIC_DID_SEED ? { seed: process.env.AGENCY_PUBLIC_DID_SEED } : {}),
     key: process.env.AGENCY_KEY || '',
   }
   const authenticator = createAcator(acatorProps)
@@ -59,6 +57,7 @@ const run = async () => {
   await agentClient.startListeningWithHandler(
     {
       DIDExchangeDone: (info) => {
+        logger.debug(`New connection: ${info.connectionId}`)
         connectionsDone.push(info.connectionId)
         sendWebSocketEvent(socketServer, {
           type: 'ConnectionStateChanged',
@@ -68,6 +67,7 @@ const run = async () => {
         })
       },
       IssueCredentialDone: (info, data) => {
+        logger.debug(`New credential: ${info.protocolId}`)
         credentialsDone[info.protocolId] = 'done'
         sendWebSocketEvent(socketServer, {
           type: 'CredentialStateChanged',
@@ -87,6 +87,8 @@ const run = async () => {
         })
       },
       PresentProofPaused: async (info, presentProof) => {
+        logger.debug(`Proof paused: ${info.protocolId}`)
+
         const protocolID = new agencyv1.ProtocolID()
         protocolID.setId(info.protocolId)
         protocolID.setTypeid(agencyv1.Protocol.Type.PRESENT_PROOF)
@@ -102,6 +104,8 @@ const run = async () => {
           .map((attr) => ({ name: attr.getName(), value: attr.getValue() }))
       },
       PresentProofDone: (info) => {
+        logger.debug(`New proof: ${info.protocolId}`)
+
         proofsDone[info.protocolId].status = 'done'
         sendWebSocketEvent(socketServer, {
           type: 'ProofStateChanged',
@@ -142,7 +146,7 @@ const run = async () => {
 
   app.use((req, res, next) => {
     if (req.path !== '/') {
-      console.log('REQUEST:', req.path, req.query)
+      logger.debug(`REQUEST: ${req.path} ${JSON.stringify(req.query)}`)
     }
     next()
   })
@@ -155,7 +159,7 @@ const run = async () => {
 
     const invitation = await agentClient.createInvitation(msg)
 
-    console.log('Created invitation with Findy Agency:', invitation.getUrl())
+    logger.info(`Created invitation with Findy Agency: ${invitation.getUrl()}`)
 
     return res.json({
       invitationUrl: invitation.getUrl(),
@@ -166,7 +170,7 @@ const run = async () => {
   })
 
   app.get('/connections', async (req, res) => {
-    console.log(req.query.outOfBandId)
+    logger.debug(req.query.outOfBandId)
     const id = req.query.outOfBandId?.toString() || ''
     const foundConnections = connectionsDone.includes(id) ? [{ id, state: 'response-sent' }] : []
     res.json(foundConnections)
@@ -252,16 +256,16 @@ const run = async () => {
   })
 
   app.get('/connections/:id', async (req, res, next) => {
-    console.log(req.params.id)
+    logger.debug(req.params.id)
     next()
   })
 
-  const server = app.listen(5000, () => console.log('Started'))
+  const server = app.listen(5000, () => logger.info('Started'))
   server.on('upgrade', (request, socket, head) => {
     socketServer.handleUpgrade(request, socket as Socket, head, () => {
-      console.log('ws upgraded')
+      logger.info('ws upgraded')
+      socketServer.emit('connection', socket, request)
     })
   })
 }
-
 run()

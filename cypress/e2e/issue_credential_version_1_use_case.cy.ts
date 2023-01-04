@@ -1,13 +1,35 @@
-import type { Event } from '../types/event'
-
-import { webSocketConfig } from '../config/websocket'
-
-const API_URL = Cypress.env('apiUrl')
-
-const TEST_AGENT_URL = 'http://localhost:9000'
+const username = 'user-' + new Date().getTime()
+let agentJWT = ''
 
 describe('Onboarding demo test using issue credential protocol version 1', () => {
+  before(() => {
+    cy.exec('findy-agent-cli new-key').then(({ stdout: key }) => {
+      const registerCmd =
+        'findy-agent-cli authn register ' +
+        `-u "${username}" ` +
+        '--url "http://localhost:8088" ' +
+        '--origin "http://localhost:3000" ' +
+        '--key ' +
+        key
+      cy.exec(registerCmd).then(() => {
+        const loginCmd =
+          'findy-agent-cli authn login ' +
+          `-u "${username}" ` +
+          '--url "http://localhost:8088" ' +
+          '--origin "http://localhost:3000" ' +
+          '--key ' +
+          key
+        cy.exec(loginCmd).then(({ stdout }) => {
+          agentJWT = stdout as string
+          const setModeCmd = 'findy-agent-cli agent mode-cmd --auto --jwt ' + agentJWT
+          cy.exec(setModeCmd)
+        })
+      })
+    })
+  })
+
   it('successfully completes school use case', () => {
+    // Receive ID credential
     cy.visit('/')
     cy.get('[data-cy=try-demo-button]').click()
 
@@ -16,178 +38,43 @@ describe('Onboarding demo test using issue credential protocol version 1', () =>
     cy.get('[data-cy=small-button]').click()
 
     cy.get('[data-cy=select-char]').first().click()
-    cy.intercept('POST', `${API_URL}/oob/create-legacy-invitation`).as('createInvitation')
     cy.get('[data-cy=next-onboarding-step]').click()
-
-    cy.wait('@createInvitation').then((interception) => {
-      const body = { invitationUrl: interception.response?.body.invitationUrl, autoAcceptConnection: true }
-
-      const oobId = interception.response?.body.outOfBandRecord.id
-
-      cy.request('POST', `${TEST_AGENT_URL}/oob/receive-invitation-url`, body)
-
-      // cy.streamRequest<Event>(webSocketConfig, {
-      //   streamTimeout: 10000,
-      //   // Waits for connection event with oobId and state is completed or response-sent
-      //   takeWhileFn: (event) => {
-      //     if (!isConnectionEvent(event)) return true
-
-      //     return (
-      //       event.payload.connectionRecord.outOfBandId !== oobId &&
-      //       ![DidExchangeState.Completed, DidExchangeState.ResponseSent].includes(event.payload.connectionRecord.state)
-      //     )
-      //   },
-      // }).then((results) => {
-      //   const length = (results && results.length) || 0
-      //   const result = results && results[length - 1]
-
-      //   expect(result).to.have.property('type', ConnectionEventTypes.ConnectionStateChanged)
-      // })
+    cy.get('[data-cy=qr-code]').then((elem) => {
+      const title = elem.attr('title') || ''
+      cy.exec(`findy-agent-cli agent connect --jwt "${agentJWT}" --invitation "${title}"`).then(({ stdout }) => {
+        cy.log(stdout)
+      })
     })
-
-    cy.intercept('POST', '/credentials/offer-credential').as('offerCredential')
-
     cy.get('[data-cy=next-onboarding-step]').click()
+    cy.get('circle').should('be.visible')
+    cy.get('[data-cy=next-onboarding-step]').click()
+    cy.get('[data-cy=next-onboarding-step]').click()
+    cy.url().should('be.equal', `${Cypress.config('baseUrl')}/dashboard`)
 
-    cy.wait('@offerCredential').then((interception) => {
-      const threadId = interception.response?.body.threadId
-
-      // cy.request('GET', `${TEST_AGENT_URL}/credentials/`).should((response) => {
-      //   const testAgentRecord = response.body.find(
-      //     (credentialRecord) => credentialRecord.threadId === threadId && credentialRecord.state === 'offer-received'
-      //   )
-
-      //   cy.request('POST', `${TEST_AGENT_URL}/credentials/${testAgentRecord.id}/accept-offer`)
-
-      //   cy.streamRequest<Event>(webSocketConfig, {
-      //     streamTimeout: 10000,
-      //     // Waits for credential event with threadId and state is done
-      //     takeWhileFn: (event) => {
-      //       if (!isCredentialEvent(event)) return true
-
-      //       return (
-      //         event.payload.credentialRecord.threadId !== threadId &&
-      //         ![CredentialState.Done].includes(event.payload.credentialRecord.state)
-      //       )
-      //     },
-      //   }).then((results) => {
-      //     const length = (results && results.length) || 0
-      //     const result = results && results[length - 1]
-
-      //     expect(result).to.have.property('type', CredentialEventTypes.CredentialStateChanged)
-      //   })
-
-      cy.get('[data-cy="next-onboarding-step"]').click()
+    // Get into university
+    cy.get('[data-cy=select-use-case]').first().click()
+    cy.get('[data-cy=start-container]')
+    cy.get('[data-cy=small-button]').click()
+    cy.get('[data-cy=qr-code]').then((elem) => {
+      const title = elem.attr('title') || ''
+      cy.exec(`findy-agent-cli agent connect --jwt "${agentJWT}" --invitation "${title}"`).then(({ stdout }) => {
+        cy.log(stdout)
+      })
     })
-  })
+    cy.get('[data-cy=section')
+    cy.get('[data-cy="small-button"]').click()
+    cy.get('circle').should('be.visible')
+    cy.get('[data-cy=section')
+    cy.get('[data-cy="small-button"]').click()
 
-  cy.get('[data-cy=next-onboarding-step]').click()
-  cy.url().should('be.equal', `${Cypress.config('baseUrl')}/dashboard`)
+    cy.get('[data-cy=section')
+    cy.get('[data-cy="small-button"]').click()
 
-  cy.get('[data-cy=select-use-case]').first().click()
-
-  cy.get('[data-cy=start-container]')
-  cy.get('[data-cy=small-button]').click()
-
-  cy.wait('@createInvitation').then((interception) => {
-    const body = { invitationUrl: interception.response?.body.invitationUrl, autoAcceptConnection: true }
-
-    const oobId = interception.response?.body.outOfBandRecord.id
-
-    cy.request('POST', `${TEST_AGENT_URL}/oob/receive-invitation-url`, body)
-
-    // cy.streamRequest<Event>(webSocketConfig, {
-    //   streamTimeout: 10000,
-    //   // Waits for connection event with oobId and state is completed or response-sent
-    //   takeWhileFn: (event) => {
-    //     if (!isConnectionEvent(event)) return true
-
-    //     return (
-    //       event.payload.connectionRecord.outOfBandId !== oobId &&
-    //       ![DidExchangeState.Completed, DidExchangeState.ResponseSent].includes(event.payload.connectionRecord.state)
-    //     )
-    //   },
-    // }).then((results) => {
-    //   const length = (results && results.length) || 0
-    //   const result = results && results[length - 1]
-
-    //   expect(result).to.have.property('type', ConnectionEventTypes.ConnectionStateChanged)
-    // })
-  })
-
-  cy.intercept('POST', `${API_URL}/proofs/request-proof`).as('createProof')
-
-  cy.get('[data-cy=section')
-  cy.get('[data-cy="small-button"]').click()
-
-  cy.wait('@createProof').then((interception) => {
-    const threadId = interception.response?.body.threadId
-    cy.request('GET', `${TEST_AGENT_URL}/proofs/`).should((response) => {
-      const record = response.body.find((x) => x.threadId === threadId && x.state === 'request-received')
-      cy.request('POST', `${TEST_AGENT_URL}/proofs/${record.id}/accept-request`)
-
-      // cy.streamRequest<Event>(webSocketConfig, {
-      //   streamTimeout: 10000,
-      //   // Waits for proof event with threadId and state is done
-      //   takeWhileFn: (event) => {
-      //     if (!isProofEvent(event)) return true
-
-      //     return (
-      //       event.payload.proofRecord.threadId !== threadId &&
-      //       ![ProofState.Done].includes(event.payload.proofRecord.state)
-      //     )
-      //   },
-      // }).then((results) => {
-      //   const length = (results && results.length) || 0
-      //   const result = results && results[length - 1]
-
-      //   expect(result).to.have.property('type', ProofEventTypes.ProofStateChanged)
-
-      //   cy.get('[data-cy=section')
-      //   cy.get('[data-cy="small-button"]').click()
-      // })
-    })
-  })
-
-  cy.get('[data-cy=section')
-  cy.get('[data-cy="small-button"]').click()
-
-  cy.intercept('POST', '/credentials/offer-credential').as('offerCredential')
-
-  cy.get('[data-cy=section')
-  cy.get('[data-cy="small-button"]').click()
-
-  cy.wait('@offerCredential').then((interception) => {
-    const threadId = interception.response?.body.threadId
-
-    cy.request('GET', `${TEST_AGENT_URL}/credentials/`).should((response) => {
-      const testAgentRecord = response.body.find((x) => x.threadId === threadId && x.state === 'offer-received')
-
-      cy.request('POST', `${TEST_AGENT_URL}/credentials/${testAgentRecord.id}/accept-offer`)
-
-      //   cy.streamRequest<Event>(webSocketConfig, {
-      //     streamTimeout: 10000,
-      //     // Waits for credential event with threadId and state is done
-      //     takeWhileFn: (event) => {
-      //       if (!isCredentialEvent(event)) return true
-
-      //       return (
-      //         event.payload.credentialRecord.threadId !== threadId &&
-      //         ![CredentialState.Done].includes(event.payload.credentialRecord.state)
-      //       )
-      //     },
-      //   }).then((results) => {
-      //     const length = (results && results.length) || 0
-      //     const result = results && results[length - 1]
-
-      //     expect(result).to.have.property('type', CredentialEventTypes.CredentialStateChanged)
-
-      //     cy.get('[data-cy=section')
-
-      //     cy.get('[data-cy="small-button"]').click()
-      //   })
-      // })
-    })
+    cy.get('[data-cy=section')
+    cy.get('[data-cy="small-button"]').click()
+    cy.get('circle').should('be.visible')
+    cy.get('[data-cy=section')
+    cy.get('[data-cy="small-button"]').click()
 
     cy.get('[data-cy=end-container]')
     cy.get('[data-cy=standard-button]').click()

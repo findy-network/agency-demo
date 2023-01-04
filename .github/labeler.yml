@@ -1,0 +1,2 @@
+dev:
+  - any: ['!package.json', '!package-lock.json']

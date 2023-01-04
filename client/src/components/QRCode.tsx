@@ -18,7 +18,7 @@ export const QRCode: React.FC<Props> = ({ invitationUrl, connectionState }) => {
   const isCompleted = connectionState === 'responded' || connectionState === 'completed'
 
   const renderQRCode = invitationUrl && (
-    <div className="relative m-auto rounded-lg bg-animo-lightgrey p-4">
+    <div data-cy="qr-code" title={invitationUrl} className="relative m-auto rounded-lg bg-animo-lightgrey p-4">
       <QR value={invitationUrl} size={isMobile ? 192 : isLarge ? 212 : 256} />
       {isCompleted && (
         <div className="absolute inset-0 flex justify-center items-center bg-grey bg-opacity-60 rounded-lg">

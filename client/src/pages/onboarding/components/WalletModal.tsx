@@ -34,7 +34,7 @@ export const WalletModal: React.FC<Props> = ({ isWalletModalOpen, setIsWalletMod
           initial="hidden"
           animate="show"
           exit="exit"
-          className="fixed z-10 inset-0 overflow-y-auto"
+          className="fixed z-50 inset-0 overflow-y-auto"
           aria-labelledby="modal-title"
           role="dialog"
           aria-modal="true"
@@ -80,7 +80,7 @@ export const WalletModal: React.FC<Props> = ({ isWalletModalOpen, setIsWalletMod
                       </div>
                     </div>
                   ) : (
-                    <div className="mt-3 pl-2 sm:mt-0 sm:ml-4 text-left">
+                    <div className="mt-3 pl-2 sm:mt-0 sm:ml-4 text-left" style={{ zIndex: 109990 }}>
                       <h2 className="text-lg leading-loose font-medium">1. Activate your {wallet.name}</h2>
                       <div className="mt-2">
                         <p className="text-sm">Scan the QR-code or open {wallet.url} with your mobile device.</p>

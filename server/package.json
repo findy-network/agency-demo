@@ -13,7 +13,7 @@
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
-    "@findy-network/findy-common-ts": "^0.2.2",
+    "@findy-network/findy-common-ts": "^0.2.3",
     "@types/express": "^4.17.13",
     "@types/uuid": "^8.3.3",
     "@types/ws": "^8.5.3",
@@ -23,9 +23,9 @@
     "express": "^4.17.1",
     "reflect-metadata": "^0.1.13",
     "routing-controllers": "^0.9.0",
-    "tslog": "^3.3.4",
     "typedi": "^0.10.0",
     "uuid": "9.0.0",
+    "winston": "^3.8.2",
     "ws": "^8.11.0"
   },
   "devDependencies": {

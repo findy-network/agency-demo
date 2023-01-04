@@ -6,8 +6,8 @@ export default defineConfig({
   viewportWidth: 1400,
   viewportHeight: 860,
   env: {
-    apiUrl: 'http://localhost:5000',
-    wsUrl: 'ws://localhost:5000',
+    apiUrl: 'http://localhost:5001',
+    wsUrl: 'ws://localhost:5001',
   },
   e2e: {
     // We've imported your old cypress plugins here.
@@ -16,7 +16,7 @@ export default defineConfig({
       // eslint-disable-next-line @typescript-eslint/no-var-requires
       return require('./cypress/plugins/index.js')(on, config)
     },
-    baseUrl: 'http://localhost:3000',
+    baseUrl: 'http://localhost:3001',
     specPattern: 'cypress/e2e/**/*.{js,jsx,ts,tsx}',
   },
 })

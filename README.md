@@ -1,8 +1,4 @@
-<p align="center">
-  <br />
-<img src="https://github.com/findy-network/agency-demo/blob/master/client/public/seo-logo.jpg?raw=true" alt="screenshot-demo" height="600px"/>
-
-</p>
+![Screenshot](https://github.com/findy-network/agency-demo/blob/master/client/public/seo-logo.jpg?raw=true)
 
 <h1 align="center"><b>Findy Agency Self-Sovereign Identity Demo</b></h1>
 <div align="center">
@@ -22,7 +18,7 @@
 
 Welcome to the repository of Findy Agency's Self-Sovereign identity demo. This interactive app
 demonstrates the use of verifiable credentials. This demo is built using [Findy Agency](https://findy-network.github.io).
-Findy Agency is a multitenant SSI agency. This demo is based on [Animo's]((https://animo.id))
+Findy Agency is a multitenant SSI agency. This demo is based on [Animo's](<(https://animo.id)>)
 similar demo for Aries Javascript Framework functionality.
 
 ## 🛠️ Usage
@@ -56,17 +52,16 @@ cd server
 cp .env.example .env
 ```
 
-| Variable                | Description                                                                                                        |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| `AGENCY_AUTH_URL` | Agency auth service URL |
-| `AGENCY_AUTH_ORIGIN`        | Agency auth service origin   |
-| `AGENCY_USER_NAME`      | Agent user name |
-| `AGENCY_PUBLIC_DID_SEED`      | Agent public DID seed |
-| `AGENCY_KEY`      | Agent authenticator key |
-| `SERVER_ADDRESS`      | Agency gRPC server address |
-| `SERVER_PORT`      | Agency gRPC server port |
-| `WALLET_URL`      | Agency web wallet URL |
-
+| Variable                 | Description                |
+| ------------------------ | -------------------------- |
+| `AGENCY_AUTH_URL`        | Agency auth service URL    |
+| `AGENCY_AUTH_ORIGIN`     | Agency auth service origin |
+| `AGENCY_USER_NAME`       | Agent user name            |
+| `AGENCY_PUBLIC_DID_SEED` | Agent public DID seed      |
+| `AGENCY_KEY`             | Agent authenticator key    |
+| `SERVER_ADDRESS`         | Agency gRPC server address |
+| `SERVER_PORT`            | Agency gRPC server port    |
+| `WALLET_URL`             | Agency web wallet URL      |
 
 ### Node version
 
