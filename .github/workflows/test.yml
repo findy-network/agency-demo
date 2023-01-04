@@ -76,6 +76,7 @@ jobs:
         timeout-minutes: 10
         with:
           browser: chrome
+          headed: true
 
       - name: Collect docker logs
         if: ${{ failure() }}

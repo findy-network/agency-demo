@@ -9,8 +9,8 @@ import { createExpressServer, useContainer } from 'routing-controllers'
 import { Container } from 'typedi'
 import { v4 as uuidv4 } from 'uuid'
 
-import { sendWebSocketEvent, createSocketServer } from './utils/WebSocket'
 import { CredDefService } from './controllers/CredDefService'
+import { sendWebSocketEvent, createSocketServer } from './utils/WebSocket'
 import logger from './utils/logger'
 
 const socketServer = createSocketServer()
@@ -159,7 +159,7 @@ const run = async () => {
 
     const invitation = await agentClient.createInvitation(msg)
 
-    logger.info(`Created invitation with Findy Agency: ${invitation.getUrl()}`,)
+    logger.info(`Created invitation with Findy Agency: ${invitation.getUrl()}`)
 
     return res.json({
       invitationUrl: invitation.getUrl(),
