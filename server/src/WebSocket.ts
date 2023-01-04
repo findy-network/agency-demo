@@ -18,7 +18,9 @@ export const createSocketServer = () => {
   const heartbeat = (ws: ExtWebSocket) => {
     ws.isAlive = true
   }
-  const ping = (ws: ExtWebSocket) => {}
+  const ping = (ws: ExtWebSocket) => {
+    console.log("ping ws")
+  }
 
   socketServer.on('connection', (socket: ExtWebSocket) => {
     socket.isAlive = true
@@ -31,6 +33,7 @@ export const createSocketServer = () => {
     socketServer.clients.forEach((client) => {
       const ws = client as ExtWebSocket
       if (ws.isAlive === false) {
+        console.log("ws not alive, terminating")
         return ws.terminate()
       }
       ws.isAlive = false
