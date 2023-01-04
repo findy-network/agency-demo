@@ -10,12 +10,12 @@ import { Container } from 'typedi'
 import { v4 as uuidv4 } from 'uuid'
 import { Server } from 'ws'
 
-import { sendWebSocketEvent } from './WebSocketEvents'
+import { sendWebSocketEvent, createSocketServer } from './WebSocket'
 import { CredDefService } from './controllers/CredDefService'
 import { TestLogger } from './utils/logger'
 
 const logger = new TestLogger(2) // debug
-const socketServer = new Server({ noServer: true, path: '/ws' })
+const socketServer = createSocketServer();
 
 process.on('unhandledRejection', (error) => {
   if (error instanceof Error) {
@@ -266,12 +266,8 @@ const run = async () => {
   server.on('upgrade', (request, socket, head) => {
     socketServer.handleUpgrade(request, socket as Socket, head, () => {
       console.log('ws upgraded')
-      sendWebSocketEvent(socketServer, {
-        type: 'WsConnected',
-        payload: {},
-      })
+      socketServer.emit('connection', socket, request);
     })
   })
 }
-
 run()
