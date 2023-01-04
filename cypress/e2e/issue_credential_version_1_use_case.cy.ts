@@ -27,7 +27,9 @@ describe('Onboarding demo test using issue credential protocol version 1', () =>
       })
     })
   })
+
   it('successfully completes school use case', () => {
+
     // Receive ID credential
     cy.visit('/')
     cy.get('[data-cy=try-demo-button]').click()
@@ -44,7 +46,6 @@ describe('Onboarding demo test using issue credential protocol version 1', () =>
         cy.log(stdout)
       })
     })
-    cy.wait(500)
     cy.get('[data-cy=next-onboarding-step]').click()
     cy.get('circle').should('be.visible')
     cy.get('[data-cy=next-onboarding-step]').click()

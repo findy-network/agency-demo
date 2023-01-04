@@ -266,6 +266,11 @@ const run = async () => {
   server.on('upgrade', (request, socket, head) => {
     socketServer.handleUpgrade(request, socket as Socket, head, () => {
       console.log('ws upgraded')
+      sendWebSocketEvent(socketServer, {
+        type: 'WsConnected',
+        payload: {},
+      })
+
     })
   })
 }
