@@ -15,7 +15,7 @@ import { CredDefService } from './controllers/CredDefService'
 import { TestLogger } from './utils/logger'
 
 const logger = new TestLogger(2) // debug
-const socketServer = createSocketServer();
+const socketServer = createSocketServer()
 
 process.on('unhandledRejection', (error) => {
   if (error instanceof Error) {
@@ -266,7 +266,7 @@ const run = async () => {
   server.on('upgrade', (request, socket, head) => {
     socketServer.handleUpgrade(request, socket as Socket, head, () => {
       console.log('ws upgraded')
-      socketServer.emit('connection', socket, request);
+      socketServer.emit('connection', socket, request)
     })
   })
 }

@@ -1,7 +1,7 @@
 import WebSocket from 'ws'
 
 interface ExtWebSocket extends WebSocket {
-  isAlive: boolean;
+  isAlive: boolean
 }
 
 export const sendWebSocketEvent = async (server: WebSocket.Server, data: unknown) => {
@@ -18,11 +18,13 @@ export const createSocketServer = () => {
   const heartbeat = (ws: ExtWebSocket) => {
     ws.isAlive = true
   }
-  const ping = (ws: ExtWebSocket) => { }
+  const ping = (ws: ExtWebSocket) => {}
 
   socketServer.on('connection', (socket: ExtWebSocket) => {
     socket.isAlive = true
-    socket.on('pong', () => { heartbeat(socket) })
+    socket.on('pong', () => {
+      heartbeat(socket)
+    })
   })
 
   setInterval(() => {
@@ -32,8 +34,10 @@ export const createSocketServer = () => {
         return ws.terminate()
       }
       ws.isAlive = false
-      ws.ping(() => { ping(ws) })
+      ws.ping(() => {
+        ping(ws)
+      })
     })
-  }, 30000);
+  }, 30000)
   return socketServer
 }
