@@ -6,15 +6,14 @@ import 'reflect-metadata'
 import { createAcator, openGRPCConnection, agencyv1 } from '@findy-network/findy-common-ts'
 import { json, static as stx } from 'express'
 import { createExpressServer, useContainer } from 'routing-controllers'
+import { Logger } from 'tslog'
 import { Container } from 'typedi'
 import { v4 as uuidv4 } from 'uuid'
-import { Server } from 'ws'
 
 import { sendWebSocketEvent, createSocketServer } from './WebSocket'
 import { CredDefService } from './controllers/CredDefService'
-import { TestLogger } from './utils/logger'
 
-const logger = new TestLogger(2) // debug
+const logger = new Logger()
 const socketServer = createSocketServer()
 
 process.on('unhandledRejection', (error) => {
@@ -59,7 +58,7 @@ const run = async () => {
   await agentClient.startListeningWithHandler(
     {
       DIDExchangeDone: (info) => {
-        console.log('New connection:', info.connectionId)
+        logger.debug(`New connection: ${info.connectionId}`)
         connectionsDone.push(info.connectionId)
         sendWebSocketEvent(socketServer, {
           type: 'ConnectionStateChanged',
@@ -69,7 +68,7 @@ const run = async () => {
         })
       },
       IssueCredentialDone: (info, data) => {
-        console.log('New credential:', info.protocolId)
+        logger.debug(`New credential: ${info.protocolId}`)
         credentialsDone[info.protocolId] = 'done'
         sendWebSocketEvent(socketServer, {
           type: 'CredentialStateChanged',
@@ -89,7 +88,7 @@ const run = async () => {
         })
       },
       PresentProofPaused: async (info, presentProof) => {
-        console.log('Proof paused:', info.protocolId)
+        logger.debug(`Proof paused: ${info.protocolId}`)
 
         const protocolID = new agencyv1.ProtocolID()
         protocolID.setId(info.protocolId)
@@ -106,7 +105,7 @@ const run = async () => {
           .map((attr) => ({ name: attr.getName(), value: attr.getValue() }))
       },
       PresentProofDone: (info) => {
-        console.log('New proof:', info.protocolId)
+        logger.debug(`New proof: ${info.protocolId}`)
 
         proofsDone[info.protocolId].status = 'done'
         sendWebSocketEvent(socketServer, {
@@ -148,7 +147,7 @@ const run = async () => {
 
   app.use((req, res, next) => {
     if (req.path !== '/') {
-      console.log('REQUEST:', req.path, req.query)
+      logger.debug(`REQUEST: ${req.path} ${req.query}`)
     }
     next()
   })
