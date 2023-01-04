@@ -65,7 +65,7 @@ jobs:
           echo "PORT=3001" > ./client/.env
           echo "NODE_ENV=test" >> ./client/.env
           echo "REACT_APP_HOST_BACKEND=http://localhost:5001" >> ./client/.env
-          echo "REACT_APP_HOST_WEBSOCKET=ws://localhost:5001" >> ./client/.env
+          echo "REACT_APP_HOST_WEBSOCKET=ws://localhost:5001/ws" >> ./client/.env
 
       - name: Install cli
         run: |
