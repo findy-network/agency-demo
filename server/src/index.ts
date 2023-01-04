@@ -270,7 +270,6 @@ const run = async () => {
         type: 'WsConnected',
         payload: {},
       })
-
     })
   })
 }
