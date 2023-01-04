@@ -60,10 +60,12 @@ jobs:
         run: sleep 120s
         shell: bash
 
-      - name: Start frontend
+      - name: Frontend config
         run: |
-          yarn
-          PORT=3001 NODE_ENV=test REACT_APP_HOST_BACKEND=http://localhost:5001 REACT_APP_HOST_WEBSOCKET=ws://localhost:5001 yarn client:start &
+          echo "PORT=3001" > ./client/.env
+          echo "NODE_ENV=test" >> ./client/.env
+          echo "REACT_APP_HOST_BACKEND=http://localhost:5001" >> ./client/.env
+          echo "REACT_APP_HOST_WEBSOCKET=ws://localhost:5001" >> ./client/.env
 
       - name: Install cli
         run: |
@@ -76,7 +78,8 @@ jobs:
         timeout-minutes: 10
         with:
           browser: chrome
-          headed: true
+          start: yarn client:start
+          wait-on: 'http://localhost:3001'
 
       - name: Collect docker logs
         if: ${{ failure() }}
