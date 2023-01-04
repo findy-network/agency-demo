@@ -1,6 +1,6 @@
 import WebSocket from 'ws'
 
-import logger from './utils/logger'
+import logger from './logger'
 
 export const sendWebSocketEvent = async (server: WebSocket.Server, data: unknown) => {
   server.clients.forEach((client) => {
