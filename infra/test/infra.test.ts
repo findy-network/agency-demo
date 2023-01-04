@@ -1,17 +1,37 @@
-import * as cdk from 'aws-cdk-lib'
-import { Template, Match } from 'aws-cdk-lib/assertions'
-import * as Infra from '../lib/infra-stack'
+import * as cdk from "aws-cdk-lib";
+import { Stack } from "aws-cdk-lib";
+import { Template, Match } from "aws-cdk-lib/assertions";
+import * as Infra from "../lib/infra-stack";
 
-test('SQS Queue and SNS Topic Created', () => {
-  const app = new cdk.App()
-  // WHEN
-  const stack = new Infra.InfraStack(app, 'MyTestStack')
-  // THEN
+test("Infra Stack Created", () => {
+  const app = new cdk.App();
+  const stack = new Infra.InfraStack(app, "MyTestStack", {
+    env: { account: "123456789012", region: "us-east-1" },
+  });
+  const template = Template.fromStack(stack);
 
-  const template = Template.fromStack(stack)
+  expect(template).toMatchSnapshot();
 
-  template.hasResourceProperties('AWS::SQS::Queue', {
-    VisibilityTimeout: 300,
-  })
-  template.resourceCountIs('AWS::SNS::Topic', 1)
-})
+  template.resourceCountIs("AWS::Lightsail::Container", 1);
+  template.resourceCountIs("AWS::CloudFront::Distribution", 1);
+  template.resourceCountIs(
+    "AWS::CloudFront::CloudFrontOriginAccessIdentity",
+    1
+  );
+  template.resourceCountIs("AWS::S3::Bucket", 1);
+  template.hasResourceProperties("AWS::S3::Bucket", {
+    BucketName: "example.example.com",
+    PublicAccessBlockConfiguration: {
+      BlockPublicAcls: true,
+      BlockPublicPolicy: true,
+      IgnorePublicAcls: true,
+      RestrictPublicBuckets: true,
+    },
+  });
+  template.hasResourceProperties("AWS::CloudFront::Distribution", {
+    DistributionConfig: {
+      Aliases: ["example.example.com"],
+    },
+  });
+
+});
