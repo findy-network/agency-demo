@@ -6,21 +6,21 @@ import 'reflect-metadata'
 import { createAcator, openGRPCConnection, agencyv1 } from '@findy-network/findy-common-ts'
 import { json, static as stx } from 'express'
 import { createExpressServer, useContainer } from 'routing-controllers'
-import { Logger } from 'tslog'
 import { Container } from 'typedi'
 import { v4 as uuidv4 } from 'uuid'
 
 import { sendWebSocketEvent, createSocketServer } from './WebSocket'
 import { CredDefService } from './controllers/CredDefService'
 
-const logger = new Logger()
+import logger from './utils/logger'
+
 const socketServer = createSocketServer()
 
 process.on('unhandledRejection', (error) => {
   if (error instanceof Error) {
-    logger.fatal(`Unhandled promise rejection: ${error.message}`, { error })
+    logger.error(`Unhandled promise rejection: ${error.message}`, { error })
   } else {
-    logger.fatal('Unhandled promise rejection due to non-error error', {
+    logger.error('Unhandled promise rejection due to non-error error', {
       error,
     })
   }
@@ -147,7 +147,7 @@ const run = async () => {
 
   app.use((req, res, next) => {
     if (req.path !== '/') {
-      logger.debug(`REQUEST: ${req.path} ${req.query}`)
+      logger.debug(`REQUEST: ${req.path} ${req.query.toString()}`)
     }
     next()
   })

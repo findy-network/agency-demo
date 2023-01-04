@@ -56,6 +56,10 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
+      - name: Wait for cred defs to be created
+        run: sleep 120s
+        shell: bash
+
       - name: Start frontend
         run: |
           yarn
@@ -66,10 +70,6 @@ jobs:
           curl https://raw.githubusercontent.com/findy-network/findy-agent-cli/HEAD/install.sh > install.sh
           chmod a+x install.sh
           sudo ./install.sh -b /bin
-
-      - name: Wait for frontend to start and credential defs to be created
-        run: sleep 120s
-        shell: bash
 
       - name: Cypress run
         uses: cypress-io/github-action@v5
