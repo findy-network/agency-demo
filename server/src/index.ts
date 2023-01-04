@@ -11,7 +11,6 @@ import { v4 as uuidv4 } from 'uuid'
 
 import { sendWebSocketEvent, createSocketServer } from './WebSocket'
 import { CredDefService } from './controllers/CredDefService'
-
 import logger from './utils/logger'
 
 const socketServer = createSocketServer()
