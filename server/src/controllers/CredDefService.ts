@@ -1,6 +1,8 @@
 import { agencyv1, AgentClient } from '@findy-network/findy-common-ts'
 import { Service } from 'typedi'
 
+import logger from '../utils/logger'
+
 interface CredDef {
   id: string
   schemaId: string
@@ -41,7 +43,8 @@ export class CredDefService {
     return this.credentialDefinitions
   }
 
-  public async getAllCredentialsByConnectionId(_: string) {
+  public async getAllCredentialsByConnectionId(id: string) {
+    logger.debug(id)
     return []
   }
 
@@ -205,7 +208,7 @@ export class CredDefService {
       supportRevocation: boolean
     }
   }) {
-    console.log('Creating schema', options.schema.name)
+    logger.debug(`Creating schema ${options.schema.name}`)
     const schemaMsg = new agencyv1.SchemaCreate()
     schemaMsg.setName(options.schema.name)
     schemaMsg.setVersion(options.schema.version)
@@ -213,13 +216,13 @@ export class CredDefService {
 
     const schemaId = (await this.agencyAgent.createSchema(schemaMsg)).getId()
 
-    console.log('Creating cred def for schema ID', schemaId)
+    logger.debug(`Creating cred def for schema ID ${schemaId}`)
     const msg = new agencyv1.CredDefCreate()
     msg.setSchemaid(schemaId)
     msg.setTag(options.credentialDefinition.tag)
 
     const res = await this.agencyAgent.createCredDef(msg)
-    console.log('Cred def created', res.getId())
+    logger.info(`Cred def created ${res.getId()}`)
 
     const resSchemaId = res.getId().substring(0, res.getId().lastIndexOf(':'))
     const credDef = {
@@ -232,7 +235,6 @@ export class CredDefService {
         primary: {},
       },
     }
-    console.log(credDef)
     return credDef
   }
 }

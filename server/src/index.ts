@@ -146,7 +146,7 @@ const run = async () => {
 
   app.use((req, res, next) => {
     if (req.path !== '/') {
-      logger.debug(`REQUEST: ${req.path} ${req.query.toString()}`)
+      logger.debug(`REQUEST: ${req.path} ${JSON.stringify(req.query)}`)
     }
     next()
   })
@@ -159,7 +159,7 @@ const run = async () => {
 
     const invitation = await agentClient.createInvitation(msg)
 
-    console.log('Created invitation with Findy Agency:', invitation.getUrl())
+    logger.info('Created invitation with Findy Agency:', invitation.getUrl())
 
     return res.json({
       invitationUrl: invitation.getUrl(),
@@ -170,7 +170,7 @@ const run = async () => {
   })
 
   app.get('/connections', async (req, res) => {
-    console.log(req.query.outOfBandId)
+    logger.debug(req.query.outOfBandId)
     const id = req.query.outOfBandId?.toString() || ''
     const foundConnections = connectionsDone.includes(id) ? [{ id, state: 'response-sent' }] : []
     res.json(foundConnections)
@@ -256,14 +256,14 @@ const run = async () => {
   })
 
   app.get('/connections/:id', async (req, res, next) => {
-    console.log(req.params.id)
+    logger.debug(req.params.id)
     next()
   })
 
-  const server = app.listen(5000, () => console.log('Started'))
+  const server = app.listen(5000, () => logger.info('Started'))
   server.on('upgrade', (request, socket, head) => {
     socketServer.handleUpgrade(request, socket as Socket, head, () => {
-      console.log('ws upgraded')
+      logger.info('ws upgraded')
       socketServer.emit('connection', socket, request)
     })
   })

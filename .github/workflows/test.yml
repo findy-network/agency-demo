@@ -73,6 +73,8 @@ jobs:
 
       - name: Cypress run
         uses: cypress-io/github-action@v5
+        env:
+          DEBUG: '@cypress/github-action'
         timeout-minutes: 10
         with:
           browser: chrome

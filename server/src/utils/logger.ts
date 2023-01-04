@@ -6,7 +6,7 @@ const outputFormat = format.printf((info) => `[${info.timestamp as string}] ${in
 
 const logConfig = {
   level: process.env.FINDY_CTS_LOG_LEVEL ?? 'info',
-  format: format.combine(format.colorize(), format.timestamp(), outputFormat),
+  format: format.combine(format.timestamp(), outputFormat),
   transports: [new Console()],
   exceptionHandlers: [new Console()],
   exitOnError: false,

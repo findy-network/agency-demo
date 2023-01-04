@@ -1,5 +1,7 @@
 import WebSocket from 'ws'
 
+import logger from './utils/logger'
+
 export const sendWebSocketEvent = async (server: WebSocket.Server, data: unknown) => {
   server.clients.forEach((client) => {
     if (client.readyState === WebSocket.OPEN) {
@@ -13,7 +15,9 @@ export const createSocketServer = () => {
 
   setInterval(() => {
     socketServer.clients.forEach((client) => {
-      client.ping()
+      client.ping(() => {
+        logger.debug('ws pinged')
+      })
     })
   }, 30000)
   return socketServer
