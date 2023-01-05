@@ -68,7 +68,7 @@ jobs:
           docker-compose up -d
 
       - name: Install dependencies
-        run: yarn install
+        run: yarn workspace client install
 
       - name: Wait for cred defs to be created
         run: sleep 120s

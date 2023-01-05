@@ -15,15 +15,24 @@ ENV NODE_ENV production
 
 RUN yarn server:build
 
+# TODO: yarn not handling binaries properly, so install findy-common-ts separately
+RUN apk update && apk add curl && \
+    curl https://raw.githubusercontent.com/findy-network/findy-agent-cli/HEAD/install.sh > install.sh && \
+    chmod a+x install.sh && \
+    ./install.sh -b /bin && \
+    mv /bin/findy-agent-cli /bin/findy-common-ts
+
+
 FROM node:16.18-alpine3.16
 
 WORKDIR /usr/src/app
 
 COPY server/package*.json .
 
+RUN yarn install --production
+
 # TODO: yarn not handling binaries properly, so install findy-common-ts separately
-RUN yarn install --production && \
-    yarn add @findy-network/findy-common-ts
+COPY --from=build /bin/findy-common-ts /bin/findy-common-ts
 
 ENV NODE_ENV production
 # TODO: yarn not handling binaries properly, so modify path manually
