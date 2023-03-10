@@ -25,8 +25,7 @@ export interface Props {
 
 export const StepProof: React.FC<Props> = ({ proof, step, connectionId, requestedCredentials, entity }) => {
   const dispatch = useAppDispatch()
-  //console.log(proof?.state)
-  const proofReceived = proof?.state === 'presentation-received'
+  const proofReceived = proof?.state === 'presentation-received' || proof?.state === 'done'
 
   const [isFailedRequestModalOpen, setIsFailedRequestModalOpen] = useState(false)
   const showFailedRequestModal = () => setIsFailedRequestModalOpen(true)
