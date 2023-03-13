@@ -7290,10 +7290,10 @@ jws@^3.2.2:
     jwa "^1.4.1"
     safe-buffer "^5.0.1"
 
-kbar@0.1.0-beta.39:
-  version "0.1.0-beta.39"
-  resolved "https://registry.yarnpkg.com/kbar/-/kbar-0.1.0-beta.39.tgz#9320c9b7074a362ea5e810f3a0edf4b850f12e01"
-  integrity sha512-Gjn0m3MV2V/rEYTDAhIMzxD75Rz65tuMB6v6w71B8PuU4vQzZ7dWVKEI4b56Cf47T49zrax6tqsijxcsAFpLSg==
+kbar@0.1.0-beta.40:
+  version "0.1.0-beta.40"
+  resolved "https://registry.yarnpkg.com/kbar/-/kbar-0.1.0-beta.40.tgz#89747e3c1538375fef779af986b6614bb441ae7c"
+  integrity sha512-vEV02WuEBvKaSivO2DnNtyd3gUAbruYrZCax5fXcLcVTFV6q0/w6Ew3z6Qy+AqXxbZdWguwQ3POIwgdHevp+6A==
   dependencies:
     "@radix-ui/react-portal" "^1.0.1"
     command-score "^0.1.2"
