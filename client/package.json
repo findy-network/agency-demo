@@ -5,7 +5,7 @@
   "license": "Apache-2.0",
   "description": "Findy Agency - Verifiable Credential Demo",
   "dependencies": {
-    "@reduxjs/toolkit": "^1.7.2",
+    "@reduxjs/toolkit": "^1.9.3",
     "axios": "^1.2.2",
     "framer-motion": "^8.1.7",
     "js-base64": "^3.7.2",
