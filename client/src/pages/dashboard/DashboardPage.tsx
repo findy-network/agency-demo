@@ -102,7 +102,7 @@ export const DashboardPage: React.FC = () => {
           </div>
         </>
       ) : (
-        <AnimatePresence initial={false} exitBeforeEnter onExitComplete={() => null}>
+        <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
           <Modal title={ERROR_TITLE} description={ERROR_DESCRIPTION} onOk={routeError} />
         </AnimatePresence>
       )}
