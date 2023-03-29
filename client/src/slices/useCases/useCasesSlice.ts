@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 import { fetchUseCaseBySlug, fetchAllUseCasesByCharId } from './useCasesThunks'
 
-interface UseCaseState {
+export interface UseCaseState {
   useCases: UseCase[]
   currentUseCase?: UseCase
   sectionCount: number

@@ -46,10 +46,19 @@ export class CharacterController {
     characters.forEach((char) => {
       arr.push({
         ...char,
-        starterCredentials: char.starterCredentials.map((x) => ({
-          ...x,
-          credentialDefinitionId: this.service.getCredentialDefinitionIdByTag(x.name),
-        })),
+        starterCredentials: char.starterCredentials
+          .filter((x) => {
+            try {
+              this.service.getCredentialDefinitionIdByTag(x.name)
+            } catch {
+              return false
+            }
+            return true
+          })
+          .map((x) => ({
+            ...x,
+            credentialDefinitionId: this.service.getCredentialDefinitionIdByTag(x.name),
+          })),
       })
     })
     return arr

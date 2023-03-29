@@ -57,7 +57,7 @@ const run = async () => {
   await agentClient.startListeningWithHandler(
     {
       DIDExchangeDone: (info) => {
-        logger.debug(`New connection: ${info.connectionId}`)
+        logger.info(`New connection: ${info.connectionId}`)
         connectionsDone.push(info.connectionId)
         sendWebSocketEvent(socketServer, {
           type: 'ConnectionStateChanged',
@@ -189,6 +189,8 @@ const run = async () => {
     const credential = new agencyv1.Protocol.IssueCredentialMsg()
     credential.setCredDefid(req.body.credentialFormats.indy.credentialDefinitionId)
     credential.setAttributes(attributes)
+
+    logger.info(`send cred offer ${JSON.stringify(attributes)} to ${req.body.connectionId}`)
 
     const issueResult = await protocolClient.sendCredentialOffer(req.body.connectionId, credential)
 
