@@ -57,7 +57,7 @@ const run = async () => {
   await agentClient.startListeningWithHandler(
     {
       DIDExchangeDone: (info) => {
-        logger.debug(`New connection: ${info.connectionId}`)
+        logger.info(`New connection: ${info.connectionId}`)
         connectionsDone.push(info.connectionId)
         sendWebSocketEvent(socketServer, {
           type: 'ConnectionStateChanged',
@@ -190,6 +190,8 @@ const run = async () => {
     credential.setCredDefid(req.body.credentialFormats.indy.credentialDefinitionId)
     credential.setAttributes(attributes)
 
+    logger.info(`send cred offer ${JSON.stringify(attributes)} to ${req.body.connectionId}`)
+
     const issueResult = await protocolClient.sendCredentialOffer(req.body.connectionId, credential)
 
     credentialsDone[issueResult.getId()] = 'offer-sent'
@@ -260,7 +262,7 @@ const run = async () => {
     next()
   })
 
-  const server = app.listen(5000, () => logger.info('Started'))
+  const server = app.listen(5001, () => logger.info('Started'))
   server.on('upgrade', (request, socket, head) => {
     socketServer.handleUpgrade(request, socket as Socket, head, () => {
       logger.info('ws upgraded')

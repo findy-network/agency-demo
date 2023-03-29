@@ -71,7 +71,7 @@ jobs:
         run: yarn workspace client install
 
       - name: Wait for cred defs to be created
-        run: sleep 120s
+        run: sleep 240s
         shell: bash
 
       - name: Frontend config

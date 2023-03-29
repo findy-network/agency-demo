@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 import { fetchWallets } from './walletsThunks'
 
-interface WalletsState {
+export interface WalletsState {
   wallets: Wallet[]
   isLoading: boolean
 }

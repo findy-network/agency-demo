@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 import { createProof, createProofOOB, fetchProofById } from './proofThunks'
 
-interface ProofState {
+export interface ProofState {
   proof?: ProofRecord
   proofUrl?: string
   isLoading: boolean
