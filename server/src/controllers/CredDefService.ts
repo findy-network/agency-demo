@@ -196,7 +196,7 @@ export class CredDefService {
 
     this.credentialDefinitions = [cd1]
     Promise.all([cd2, cd3, cd4, cd5, cd6, cd7, cd8, cd9, cd10, cd11, cd12]).then(
-      values => this.credentialDefinitions.push(...values)
+      (values) => this.credentialDefinitions.push(...values)
     )
   }
 

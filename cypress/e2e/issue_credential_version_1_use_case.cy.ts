@@ -45,7 +45,7 @@ describe('Onboarding demo test using issue credential protocol version 1', () =>
         cy.log(stdout)
       })
     })
-    cy.get('[data-cy=qr-code]').should("not.exist")
+    cy.get('[data-cy=qr-code]').should('not.exist')
 
     cy.get('[data-cy=next-onboarding-step]').click()
     cy.get('circle').should('be.visible')
@@ -63,7 +63,7 @@ describe('Onboarding demo test using issue credential protocol version 1', () =>
         cy.log(stdout)
       })
     })
-    cy.get('[data-cy=qr-code]').should("not.exist")
+    cy.get('[data-cy=qr-code]').should('not.exist')
 
     cy.get('[data-cy=section]')
     cy.get('[data-cy="small-button"]').click()
