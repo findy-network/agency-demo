@@ -262,7 +262,7 @@ const run = async () => {
     next()
   })
 
-  const server = app.listen(5001, () => logger.info('Started'))
+  const server = app.listen(5000, () => logger.info('Started'))
   server.on('upgrade', (request, socket, head) => {
     socketServer.handleUpgrade(request, socket as Socket, head, () => {
       logger.info('ws upgraded')
