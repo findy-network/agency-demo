@@ -1,12 +1,10 @@
 import { AnimatePresence, motion } from 'framer-motion'
+import QRCode from 'qrcode.react'
 
 import { standardFade, dropIn } from '../../../FramerAnimations'
 import appStore from '../../../assets/light/icon-app-store.png'
 import playStore from '../../../assets/light/icon-play-store.png'
 import { SmallButton } from '../../../components/SmallButton'
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const QRCode = require('qrcode.react')
 
 export interface Wallet {
   id: number
