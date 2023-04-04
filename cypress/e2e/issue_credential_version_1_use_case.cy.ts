@@ -71,12 +71,14 @@ describe('Onboarding demo test using issue credential protocol version 1', () =>
     cy.get('[data-cy=section]')
     cy.get('[data-cy="small-button"]').click()
 
+    cy.get('circle').should('be.visible')
     cy.get('[data-cy=section]')
     cy.get('[data-cy="small-button"]').click()
 
+    cy.get('circle').should('not.exist')
+
     cy.get('[data-cy=section]')
     cy.get('[data-cy="small-button"]').click()
-    cy.get('circle').should('be.visible')
     cy.get('[data-cy=section]')
     cy.get('[data-cy="small-button"]').click()
 
