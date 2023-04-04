@@ -11,15 +11,16 @@
       src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"
   /></a>
   [![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-%230074c1.svg)](https://img.shields.io/badge/%3C%2F%3E-TypeScript-%230074c1.svg)
- 
+
 </div>
 
-## ✨ Hi there!
+## ✨ Hi there
 
 Welcome to the repository of Findy Agency's Self-Sovereign identity demo. This interactive app
 demonstrates the use of verifiable credentials. This demo is built using [Findy Agency](https://findy-network.github.io).
-Findy Agency is a multitenant SSI agency. This demo is based on [Animo's](<(https://animo.id)>)
-similar demo for Aries Javascript Framework functionality.
+Findy Agency is a multitenant SSI agency. This demo is based on [Animo's](<(<https://animo.id>)>)
+similar demo for Aries Javascript Framework functionality. So big thanks to Animo for creating it
+in the first place!
 
 ## 🛠️ Usage
 

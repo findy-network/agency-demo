@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-interface OnboardingState {
+export interface OnboardingState {
   onboardingStep: number
   connectionId?: string
   isCompleted: boolean

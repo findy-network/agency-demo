@@ -5,7 +5,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 import { fetchAllCharacters, fetchCharacterById } from './charactersThunks'
 
-interface CharactersState {
+export interface CharactersState {
   characters: Character[]
   currentCharacter?: Character
   isLoading: boolean

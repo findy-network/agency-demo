@@ -10,7 +10,7 @@ import {
   deleteCredentialById,
 } from './credentialsThunks'
 
-interface CredentialState {
+export interface CredentialState {
   credentials: CredentialExchangeRecord[]
   issuedCredentials: CredentialExchangeRecord[]
   isLoading: boolean

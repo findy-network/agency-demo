@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 import { fetchLastServerReset } from './preferencesThunks'
 
-interface PreferencesState {
+export interface PreferencesState {
   darkMode: boolean
   completedUseCaseSlugs: string[]
   demoCompleted: boolean

@@ -50,7 +50,7 @@ export class CredDefService {
 
   // TODO: these should be auto-created based on the use cases.
   private async init() {
-    const cd1 = this.createSchemaCredentialDefinition({
+    const cd1 = await this.createSchemaCredentialDefinition({
       schema: {
         attributeNames: ['Name', 'Street', 'City', 'Date of birth', 'Nationality'],
         name: 'Animo ID',
@@ -194,7 +194,10 @@ export class CredDefService {
       },
     })
 
-    this.credentialDefinitions = await Promise.all([cd1, cd2, cd3, cd4, cd5, cd6, cd7, cd8, cd9, cd10, cd11, cd12])
+    this.credentialDefinitions = [cd1]
+    Promise.all([cd2, cd3, cd4, cd5, cd6, cd7, cd8, cd9, cd10, cd11, cd12]).then((values) =>
+      this.credentialDefinitions.push(...values)
+    )
   }
 
   private async createSchemaCredentialDefinition(options: {
@@ -208,7 +211,7 @@ export class CredDefService {
       supportRevocation: boolean
     }
   }) {
-    logger.debug(`Creating schema ${options.schema.name}`)
+    logger.info(`Creating schema ${options.schema.name}`)
     const schemaMsg = new agencyv1.SchemaCreate()
     schemaMsg.setName(options.schema.name)
     schemaMsg.setVersion(options.schema.version)
@@ -216,7 +219,7 @@ export class CredDefService {
 
     const schemaId = (await this.agencyAgent.createSchema(schemaMsg)).getId()
 
-    logger.debug(`Creating cred def for schema ID ${schemaId}`)
+    logger.info(`Creating cred def for schema ID ${schemaId}`)
     const msg = new agencyv1.CredDefCreate()
     msg.setSchemaid(schemaId)
     msg.setTag(options.credentialDefinition.tag)
