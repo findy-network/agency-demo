@@ -2,6 +2,7 @@ import type { Entity, RequestedCredential, Step } from '../../../slices/types'
 import type { ProofRecord } from '../../../utils/Aries'
 
 import { AnimatePresence, motion } from 'framer-motion'
+import QR from 'qrcode.react'
 import React, { useEffect } from 'react'
 import { FiExternalLink } from 'react-icons/fi'
 import { useMediaQuery } from 'react-responsive'
@@ -14,9 +15,6 @@ import { createProofOOB } from '../../../slices/proof/proofThunks'
 import { ProofEventTypes } from '../../../utils/Aries'
 import { ProofAttributesCard } from '../components/ProofAttributesCard'
 import { StepInfo } from '../components/StepInfo'
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const QR = require('qrcode.react')
 
 export interface Props {
   proof?: ProofRecord
