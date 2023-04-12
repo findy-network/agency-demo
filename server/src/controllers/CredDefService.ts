@@ -19,7 +19,7 @@ interface CredDef {
 export class CredDefService {
   private agencyAgent: AgentClient
   private credentialDefinitions: CredDef[] = []
-  private schemaPrefix = ""
+  private schemaPrefix = ''
 
   public constructor(agencyConnection: AgentClient) {
     this.agencyAgent = agencyConnection
@@ -257,9 +257,10 @@ export class CredDefService {
     schemaMsg.setVersion(Date.now().toString())
     schemaMsg.setAttributesList(['test'])
     const schemaId = (await this.agencyAgent.createSchema(schemaMsg)).getId()
-    const indexes = schemaId.split('')
-      .map((letter, index) => letter === ':' ? index : -1)
-      .filter(item => item >= 0)
+    const indexes = schemaId
+      .split('')
+      .map((letter, index) => (letter === ':' ? index : -1))
+      .filter((item) => item >= 0)
     return schemaId.substring(0, indexes[1])
   }
 }
