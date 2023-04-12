@@ -18,7 +18,7 @@
 
 Welcome to the repository of Findy Agency's Self-Sovereign identity demo. This interactive app
 demonstrates the use of verifiable credentials. This demo is built using [Findy Agency](https://findy-network.github.io).
-Findy Agency is a multitenant SSI agency. This demo is based on [Animo's](<(<https://animo.id>)>)
+Findy Agency is a multitenant SSI agency. This demo is based on [Animo's](https://animo.id)
 similar demo for Aries Javascript Framework functionality. So big thanks to Animo for creating it
 in the first place!
 

@@ -19,6 +19,7 @@ interface CredDef {
 export class CredDefService {
   private agencyAgent: AgentClient
   private credentialDefinitions: CredDef[] = []
+  private schemaPrefix = ''
 
   public constructor(agencyConnection: AgentClient) {
     this.agencyAgent = agencyConnection
@@ -50,6 +51,9 @@ export class CredDefService {
 
   // TODO: these should be auto-created based on the use cases.
   private async init() {
+    if (!this.schemaPrefix) {
+      this.schemaPrefix = await this.getSchemaPrefix()
+    }
     const cd1 = await this.createSchemaCredentialDefinition({
       schema: {
         attributeNames: ['Name', 'Street', 'City', 'Date of birth', 'Nationality'],
@@ -217,7 +221,12 @@ export class CredDefService {
     schemaMsg.setVersion(options.schema.version)
     schemaMsg.setAttributesList(options.schema.attributeNames)
 
-    const schemaId = (await this.agencyAgent.createSchema(schemaMsg)).getId()
+    let schemaId = `${this.schemaPrefix}:${options.schema.name}:${options.schema.version}`
+    try {
+      schemaId = (await this.agencyAgent.createSchema(schemaMsg)).getId()
+    } catch {
+      logger.warn(`Schema creation failed, using id ${schemaId}`)
+    }
 
     logger.info(`Creating cred def for schema ID ${schemaId}`)
     const msg = new agencyv1.CredDefCreate()
@@ -239,5 +248,19 @@ export class CredDefService {
       },
     }
     return credDef
+  }
+
+  // temp hack to avoid storing schema ids
+  private async getSchemaPrefix() {
+    const schemaMsg = new agencyv1.SchemaCreate()
+    schemaMsg.setName('test')
+    schemaMsg.setVersion(Date.now().toString())
+    schemaMsg.setAttributesList(['test'])
+    const schemaId = (await this.agencyAgent.createSchema(schemaMsg)).getId()
+    const indexes = schemaId
+      .split('')
+      .map((letter, index) => (letter === ':' ? index : -1))
+      .filter((item) => item >= 0)
+    return schemaId.substring(0, indexes[1])
   }
 }
