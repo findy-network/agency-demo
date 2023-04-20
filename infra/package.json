@@ -14,7 +14,7 @@
   "devDependencies": {
     "aws-cdk": "2.74.0",
     "@types/jest": "^27.5.2",
-    "@types/node": "18.15.11",
+    "@types/node": "18.15.12",
     "@types/prettier": "2.7.2",
     "jest": "^27.5.1",
     "ts-jest": "^27.1.4",
