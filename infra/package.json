@@ -12,7 +12,7 @@
     "pipeline:context": "JSON=$(cat cdk.context.json) && aws ssm put-parameter --overwrite --name \"/agency-demo/cdk-context\" --value \"$JSON\" --type String"
   },
   "devDependencies": {
-    "aws-cdk": "2.74.0",
+    "aws-cdk": "2.78.0",
     "@types/jest": "^27.5.2",
     "@types/node": "18.15.11",
     "@types/prettier": "2.7.2",
