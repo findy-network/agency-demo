@@ -22,7 +22,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "reflect-metadata": "^0.1.13",
-    "routing-controllers": "^0.10.2",
+    "routing-controllers": "^0.10.4",
     "typedi": "^0.10.0",
     "uuid": "9.0.0",
     "winston": "^3.8.2",
