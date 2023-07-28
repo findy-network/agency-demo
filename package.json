@@ -41,7 +41,7 @@
     "eslint-config-react-app": "^7.0.0",
     "eslint-import-resolver-typescript": "^3.5.5",
     "eslint-plugin-cypress": "^2.12.1",
-    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-import": "^2.28.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.33.0",
     "js-green-licenses": "^4.0.0",
