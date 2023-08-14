@@ -2628,10 +2628,10 @@
   resolved "https://registry.yarnpkg.com/@typescript-eslint/types/-/types-5.62.0.tgz#258607e60effa309f067608931c3df6fed41fd2f"
   integrity sha512-87NVngcbVXUahrRTqIK27gD2t5Cu1yuCXxbLcFtCzZGlfyVWWh8mLHkoxzjsB6DDNnvdL+fW8MiwPEJyGJQDgQ==
 
-"@typescript-eslint/types@6.3.0":
-  version "6.3.0"
-  resolved "https://registry.yarnpkg.com/@typescript-eslint/types/-/types-6.3.0.tgz#84517f1427923e714b8418981e493b6635ab4c9d"
-  integrity sha512-K6TZOvfVyc7MO9j60MkRNWyFSf86IbOatTKGrpTQnzarDZPYPVy0oe3myTMq7VjhfsUAbNUW8I5s+2lZvtx1gg==
+"@typescript-eslint/types@6.4.0":
+  version "6.4.0"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/types/-/types-6.4.0.tgz#5b109a59a805f0d8d375895e42d9e5f0037f66ee"
+  integrity sha512-+FV9kVFrS7w78YtzkIsNSoYsnOtrYVnKWSTVXoL1761CsCRv5wpDOINgsXpxD67YCLZtVQekDDyaxfjVWUJmmg==
 
 "@typescript-eslint/typescript-estree@5.59.9":
   version "5.59.9"
@@ -2703,12 +2703,12 @@
     "@typescript-eslint/types" "5.62.0"
     eslint-visitor-keys "^3.3.0"
 
-"@typescript-eslint/visitor-keys@^6.3.0":
-  version "6.3.0"
-  resolved "https://registry.yarnpkg.com/@typescript-eslint/visitor-keys/-/visitor-keys-6.3.0.tgz#8d09aa3e389ae0971426124c155ac289afbe450a"
-  integrity sha512-kEhRRj7HnvaSjux1J9+7dBen15CdWmDnwrpyiHsFX6Qx2iW5LOBUgNefOFeh2PjWPlNwN8TOn6+4eBU3J/gupw==
+"@typescript-eslint/visitor-keys@^6.4.0":
+  version "6.4.0"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/visitor-keys/-/visitor-keys-6.4.0.tgz#96a426cdb1add28274abd7a34aefe27f8b7d51ef"
+  integrity sha512-yJSfyT+uJm+JRDWYRYdCm2i+pmvXJSMtPR9Cq5/XQs4QIgNoLcoRtDdzsLbLsFM/c6um6ohQkg/MLxWvoIndJA==
   dependencies:
-    "@typescript-eslint/types" "6.3.0"
+    "@typescript-eslint/types" "6.4.0"
     eslint-visitor-keys "^3.4.1"
 
 "@webassemblyjs/ast@1.11.6", "@webassemblyjs/ast@^1.11.5":
