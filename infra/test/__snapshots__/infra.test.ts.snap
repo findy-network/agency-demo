@@ -1,67 +1,67 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Infra Stack Created 1`] = `
-Object {
-  "Mappings": Object {
-    "AWSCloudFrontPartitionHostedZoneIdMap": Object {
-      "aws": Object {
+{
+  "Mappings": {
+    "AWSCloudFrontPartitionHostedZoneIdMap": {
+      "aws": {
         "zoneId": "Z2FDTNDATAQYW2",
       },
-      "aws-cn": Object {
+      "aws-cn": {
         "zoneId": "Z3RFFRIM2A3IF5",
       },
     },
   },
-  "Parameters": Object {
-    "BootstrapVersion": Object {
+  "Parameters": {
+    "BootstrapVersion": {
       "Default": "/cdk-bootstrap/hnb659fds/version",
       "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
   },
-  "Resources": Object {
-    "FindyAgencyDemoBackend": Object {
-      "Properties": Object {
-        "ContainerServiceDeployment": Object {
-          "Containers": Array [
-            Object {
+  "Resources": {
+    "FindyAgencyDemoBackend": {
+      "Properties": {
+        "ContainerServiceDeployment": {
+          "Containers": [
+            {
               "ContainerName": "agency-demo",
-              "Environment": Array [
-                Object {
+              "Environment": [
+                {
                   "Variable": "AGENCY_AUTH_URL",
                 },
-                Object {
+                {
                   "Variable": "AGENCY_AUTH_ORIGIN",
                 },
-                Object {
+                {
                   "Variable": "AGENCY_USER_NAME",
                 },
-                Object {
+                {
                   "Variable": "AGENCY_PUBLIC_DID_SEED",
                 },
-                Object {
+                {
                   "Variable": "AGENCY_KEY",
                 },
-                Object {
+                {
                   "Variable": "SERVER_ADDRESS",
                 },
-                Object {
+                {
                   "Variable": "SERVER_PORT",
                 },
-                Object {
+                {
                   "Variable": "WALLET_URL",
                 },
               ],
               "Image": "ghcr.io/findy-network/agency-demo:latest",
-              "Ports": Array [
-                Object {
+              "Ports": [
+                {
                   "Port": "5000",
                   "Protocol": "HTTP",
                 },
               ],
             },
           ],
-          "PublicEndpoint": Object {
+          "PublicEndpoint": {
             "ContainerName": "agency-demo",
             "ContainerPort": 5000,
           },
@@ -72,19 +72,19 @@ Object {
       },
       "Type": "AWS::Lightsail::Container",
     },
-    "MyTestStackfrontendMyTestStackfrontendarecordFA69DF2A": Object {
-      "Properties": Object {
-        "AliasTarget": Object {
-          "DNSName": Object {
-            "Fn::GetAtt": Array [
+    "MyTestStackfrontendMyTestStackfrontendarecordFA69DF2A": {
+      "Properties": {
+        "AliasTarget": {
+          "DNSName": {
+            "Fn::GetAtt": [
               "MyTestStackfrontendMyTestStackfrontenddistributionCFDistributionCE45D98B",
               "DomainName",
             ],
           },
-          "HostedZoneId": Object {
-            "Fn::FindInMap": Array [
+          "HostedZoneId": {
+            "Fn::FindInMap": [
               "AWSCloudFrontPartitionHostedZoneIdMap",
-              Object {
+              {
                 "Ref": "AWS::Partition",
               },
               "zoneId",
@@ -97,17 +97,17 @@ Object {
       },
       "Type": "AWS::Route53::RecordSet",
     },
-    "MyTestStackfrontendMyTestStackfrontendbucket32024486": Object {
+    "MyTestStackfrontendMyTestStackfrontendbucket32024486": {
       "DeletionPolicy": "Delete",
-      "Properties": Object {
+      "Properties": {
         "BucketName": "example.example.com",
-        "PublicAccessBlockConfiguration": Object {
+        "PublicAccessBlockConfiguration": {
           "BlockPublicAcls": true,
           "BlockPublicPolicy": true,
           "IgnorePublicAcls": true,
           "RestrictPublicBuckets": true,
         },
-        "WebsiteConfiguration": Object {
+        "WebsiteConfiguration": {
           "ErrorDocument": "index.html",
           "IndexDocument": "index.html",
         },
@@ -115,30 +115,30 @@ Object {
       "Type": "AWS::S3::Bucket",
       "UpdateReplacePolicy": "Delete",
     },
-    "MyTestStackfrontendMyTestStackfrontendbucketPolicy198AA21E": Object {
-      "Properties": Object {
-        "Bucket": Object {
+    "MyTestStackfrontendMyTestStackfrontendbucketPolicy198AA21E": {
+      "Properties": {
+        "Bucket": {
           "Ref": "MyTestStackfrontendMyTestStackfrontendbucket32024486",
         },
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
+        "PolicyDocument": {
+          "Statement": [
+            {
               "Action": "s3:GetObject*",
               "Effect": "Allow",
-              "Principal": Object {
-                "CanonicalUser": Object {
-                  "Fn::GetAtt": Array [
+              "Principal": {
+                "CanonicalUser": {
+                  "Fn::GetAtt": [
                     "MyTestStackfrontendMyTestStackfrontendoriginaccessidentityCBE7DCDB",
                     "S3CanonicalUserId",
                   ],
                 },
               },
-              "Resource": Object {
-                "Fn::Join": Array [
+              "Resource": {
+                "Fn::Join": [
                   "",
-                  Array [
-                    Object {
-                      "Fn::GetAtt": Array [
+                  [
+                    {
+                      "Fn::GetAtt": [
                         "MyTestStackfrontendMyTestStackfrontendbucket32024486",
                         "Arn",
                       ],
@@ -148,41 +148,41 @@ Object {
                 ],
               },
             },
-            Object {
+            {
               "Action": "s3:ListBucket",
               "Effect": "Allow",
-              "Principal": Object {
-                "CanonicalUser": Object {
-                  "Fn::GetAtt": Array [
+              "Principal": {
+                "CanonicalUser": {
+                  "Fn::GetAtt": [
                     "MyTestStackfrontendMyTestStackfrontendoriginaccessidentityCBE7DCDB",
                     "S3CanonicalUserId",
                   ],
                 },
               },
-              "Resource": Object {
-                "Fn::GetAtt": Array [
+              "Resource": {
+                "Fn::GetAtt": [
                   "MyTestStackfrontendMyTestStackfrontendbucket32024486",
                   "Arn",
                 ],
               },
             },
-            Object {
+            {
               "Action": "s3:GetObject",
               "Effect": "Allow",
-              "Principal": Object {
-                "CanonicalUser": Object {
-                  "Fn::GetAtt": Array [
+              "Principal": {
+                "CanonicalUser": {
+                  "Fn::GetAtt": [
                     "MyTestStackfrontendMyTestStackfrontendoriginaccessidentityCBE7DCDB",
                     "S3CanonicalUserId",
                   ],
                 },
               },
-              "Resource": Object {
-                "Fn::Join": Array [
+              "Resource": {
+                "Fn::Join": [
                   "",
-                  Array [
-                    Object {
-                      "Fn::GetAtt": Array [
+                  [
+                    {
+                      "Fn::GetAtt": [
                         "MyTestStackfrontendMyTestStackfrontendbucket32024486",
                         "Arn",
                       ],
@@ -198,19 +198,19 @@ Object {
       },
       "Type": "AWS::S3::BucketPolicy",
     },
-    "MyTestStackfrontendMyTestStackfrontendcertificateCertificateRequestorFunction2A30CDB8": Object {
-      "DependsOn": Array [
+    "MyTestStackfrontendMyTestStackfrontendcertificateCertificateRequestorFunction2A30CDB8": {
+      "DependsOn": [
         "MyTestStackfrontendMyTestStackfrontendcertificateCertificateRequestorFunctionServiceRoleDefaultPolicyD8E1CDCE",
         "MyTestStackfrontendMyTestStackfrontendcertificateCertificateRequestorFunctionServiceRole54B6A1AA",
       ],
-      "Properties": Object {
-        "Code": Object {
+      "Properties": {
+        "Code": {
           "S3Bucket": "cdk-hnb659fds-assets-123456789012-us-east-1",
           "S3Key": "d4c47643615e33c32aac58169698a692fa1d1f3e0da0dd6c4bf1c0e6af68d757.zip",
         },
         "Handler": "index.certificateRequestHandler",
-        "Role": Object {
-          "Fn::GetAtt": Array [
+        "Role": {
+          "Fn::GetAtt": [
             "MyTestStackfrontendMyTestStackfrontendcertificateCertificateRequestorFunctionServiceRole54B6A1AA",
             "Arn",
           ],
@@ -220,27 +220,27 @@ Object {
       },
       "Type": "AWS::Lambda::Function",
     },
-    "MyTestStackfrontendMyTestStackfrontendcertificateCertificateRequestorFunctionServiceRole54B6A1AA": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "MyTestStackfrontendMyTestStackfrontendcertificateCertificateRequestorFunctionServiceRole54B6A1AA": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": Object {
+              "Principal": {
                 "Service": "lambda.amazonaws.com",
               },
             },
           ],
           "Version": "2012-10-17",
         },
-        "ManagedPolicyArns": Array [
-          Object {
-            "Fn::Join": Array [
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
               "",
-              Array [
+              [
                 "arn:",
-                Object {
+                {
                   "Ref": "AWS::Partition",
                 },
                 ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
@@ -251,12 +251,12 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "MyTestStackfrontendMyTestStackfrontendcertificateCertificateRequestorFunctionServiceRoleDefaultPolicyD8E1CDCE": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": Array [
+    "MyTestStackfrontendMyTestStackfrontendcertificateCertificateRequestorFunctionServiceRoleDefaultPolicyD8E1CDCE": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
                 "acm:RequestCertificate",
                 "acm:DescribeCertificate",
                 "acm:DeleteCertificate",
@@ -265,35 +265,35 @@ Object {
               "Effect": "Allow",
               "Resource": "*",
             },
-            Object {
+            {
               "Action": "route53:GetChange",
               "Effect": "Allow",
               "Resource": "*",
             },
-            Object {
+            {
               "Action": "route53:changeResourceRecordSets",
-              "Condition": Object {
-                "ForAllValues:StringEquals": Object {
-                  "route53:ChangeResourceRecordSetsActions": Array [
+              "Condition": {
+                "ForAllValues:StringEquals": {
+                  "route53:ChangeResourceRecordSetsActions": [
                     "UPSERT",
                   ],
-                  "route53:ChangeResourceRecordSetsRecordTypes": Array [
+                  "route53:ChangeResourceRecordSetsRecordTypes": [
                     "CNAME",
                   ],
                 },
-                "ForAllValues:StringLike": Object {
-                  "route53:ChangeResourceRecordSetsNormalizedRecordNames": Array [
+                "ForAllValues:StringLike": {
+                  "route53:ChangeResourceRecordSetsNormalizedRecordNames": [
                     "*.example.example.com",
                   ],
                 },
               },
               "Effect": "Allow",
-              "Resource": Object {
-                "Fn::Join": Array [
+              "Resource": {
+                "Fn::Join": [
                   "",
-                  Array [
+                  [
                     "arn:",
-                    Object {
+                    {
                       "Ref": "AWS::Partition",
                     },
                     ":route53:::hostedzone/DUMMY",
@@ -305,22 +305,22 @@ Object {
           "Version": "2012-10-17",
         },
         "PolicyName": "MyTestStackfrontendMyTestStackfrontendcertificateCertificateRequestorFunctionServiceRoleDefaultPolicyD8E1CDCE",
-        "Roles": Array [
-          Object {
+        "Roles": [
+          {
             "Ref": "MyTestStackfrontendMyTestStackfrontendcertificateCertificateRequestorFunctionServiceRole54B6A1AA",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "MyTestStackfrontendMyTestStackfrontendcertificateCertificateRequestorResourceBC6C0DEA": Object {
+    "MyTestStackfrontendMyTestStackfrontendcertificateCertificateRequestorResourceBC6C0DEA": {
       "DeletionPolicy": "Delete",
-      "Properties": Object {
+      "Properties": {
         "DomainName": "example.example.com",
         "HostedZoneId": "DUMMY",
         "Region": "us-east-1",
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
+        "ServiceToken": {
+          "Fn::GetAtt": [
             "MyTestStackfrontendMyTestStackfrontendcertificateCertificateRequestorFunction2A30CDB8",
             "Arn",
           ],
@@ -329,26 +329,26 @@ Object {
       "Type": "AWS::CloudFormation::CustomResource",
       "UpdateReplacePolicy": "Delete",
     },
-    "MyTestStackfrontendMyTestStackfrontenddistributionCFDistributionCE45D98B": Object {
-      "Properties": Object {
-        "DistributionConfig": Object {
-          "Aliases": Array [
+    "MyTestStackfrontendMyTestStackfrontenddistributionCFDistributionCE45D98B": {
+      "Properties": {
+        "DistributionConfig": {
+          "Aliases": [
             "example.example.com",
           ],
-          "CacheBehaviors": Array [
-            Object {
-              "AllowedMethods": Array [
+          "CacheBehaviors": [
+            {
+              "AllowedMethods": [
                 "GET",
                 "HEAD",
               ],
-              "CachedMethods": Array [
+              "CachedMethods": [
                 "GET",
                 "HEAD",
               ],
               "Compress": true,
               "DefaultTTL": 0,
-              "ForwardedValues": Object {
-                "Cookies": Object {
+              "ForwardedValues": {
+                "Cookies": {
                   "Forward": "none",
                 },
                 "QueryString": false,
@@ -359,19 +359,19 @@ Object {
               "TargetOriginId": "origin1",
               "ViewerProtocolPolicy": "redirect-to-https",
             },
-            Object {
-              "AllowedMethods": Array [
+            {
+              "AllowedMethods": [
                 "GET",
                 "HEAD",
               ],
-              "CachedMethods": Array [
+              "CachedMethods": [
                 "GET",
                 "HEAD",
               ],
               "Compress": true,
               "DefaultTTL": 0,
-              "ForwardedValues": Object {
-                "Cookies": Object {
+              "ForwardedValues": {
+                "Cookies": {
                   "Forward": "none",
                 },
                 "QueryString": false,
@@ -382,8 +382,8 @@ Object {
               "TargetOriginId": "origin1",
               "ViewerProtocolPolicy": "redirect-to-https",
             },
-            Object {
-              "AllowedMethods": Array [
+            {
+              "AllowedMethods": [
                 "DELETE",
                 "GET",
                 "HEAD",
@@ -392,16 +392,16 @@ Object {
                 "POST",
                 "PUT",
               ],
-              "CachedMethods": Array [
+              "CachedMethods": [
                 "GET",
                 "HEAD",
               ],
               "Compress": true,
-              "ForwardedValues": Object {
-                "Cookies": Object {
+              "ForwardedValues": {
+                "Cookies": {
                   "Forward": "all",
                 },
-                "Headers": Array [
+                "Headers": [
                   "*",
                 ],
                 "QueryString": true,
@@ -410,8 +410,8 @@ Object {
               "TargetOriginId": "origin2",
               "ViewerProtocolPolicy": "redirect-to-https",
             },
-            Object {
-              "AllowedMethods": Array [
+            {
+              "AllowedMethods": [
                 "DELETE",
                 "GET",
                 "HEAD",
@@ -420,16 +420,16 @@ Object {
                 "POST",
                 "PUT",
               ],
-              "CachedMethods": Array [
+              "CachedMethods": [
                 "GET",
                 "HEAD",
               ],
               "Compress": true,
-              "ForwardedValues": Object {
-                "Cookies": Object {
+              "ForwardedValues": {
+                "Cookies": {
                   "Forward": "all",
                 },
-                "Headers": Array [
+                "Headers": [
                   "*",
                 ],
                 "QueryString": true,
@@ -438,8 +438,8 @@ Object {
               "TargetOriginId": "origin2",
               "ViewerProtocolPolicy": "redirect-to-https",
             },
-            Object {
-              "AllowedMethods": Array [
+            {
+              "AllowedMethods": [
                 "DELETE",
                 "GET",
                 "HEAD",
@@ -448,16 +448,16 @@ Object {
                 "POST",
                 "PUT",
               ],
-              "CachedMethods": Array [
+              "CachedMethods": [
                 "GET",
                 "HEAD",
               ],
               "Compress": true,
-              "ForwardedValues": Object {
-                "Cookies": Object {
+              "ForwardedValues": {
+                "Cookies": {
                   "Forward": "all",
                 },
-                "Headers": Array [
+                "Headers": [
                   "*",
                 ],
                 "QueryString": true,
@@ -466,8 +466,8 @@ Object {
               "TargetOriginId": "origin2",
               "ViewerProtocolPolicy": "redirect-to-https",
             },
-            Object {
-              "AllowedMethods": Array [
+            {
+              "AllowedMethods": [
                 "DELETE",
                 "GET",
                 "HEAD",
@@ -476,16 +476,16 @@ Object {
                 "POST",
                 "PUT",
               ],
-              "CachedMethods": Array [
+              "CachedMethods": [
                 "GET",
                 "HEAD",
               ],
               "Compress": true,
-              "ForwardedValues": Object {
-                "Cookies": Object {
+              "ForwardedValues": {
+                "Cookies": {
                   "Forward": "all",
                 },
-                "Headers": Array [
+                "Headers": [
                   "*",
                 ],
                 "QueryString": true,
@@ -494,8 +494,8 @@ Object {
               "TargetOriginId": "origin2",
               "ViewerProtocolPolicy": "redirect-to-https",
             },
-            Object {
-              "AllowedMethods": Array [
+            {
+              "AllowedMethods": [
                 "DELETE",
                 "GET",
                 "HEAD",
@@ -504,16 +504,16 @@ Object {
                 "POST",
                 "PUT",
               ],
-              "CachedMethods": Array [
+              "CachedMethods": [
                 "GET",
                 "HEAD",
               ],
               "Compress": true,
-              "ForwardedValues": Object {
-                "Cookies": Object {
+              "ForwardedValues": {
+                "Cookies": {
                   "Forward": "all",
                 },
-                "Headers": Array [
+                "Headers": [
                   "*",
                 ],
                 "QueryString": true,
@@ -522,8 +522,8 @@ Object {
               "TargetOriginId": "origin2",
               "ViewerProtocolPolicy": "redirect-to-https",
             },
-            Object {
-              "AllowedMethods": Array [
+            {
+              "AllowedMethods": [
                 "DELETE",
                 "GET",
                 "HEAD",
@@ -532,16 +532,16 @@ Object {
                 "POST",
                 "PUT",
               ],
-              "CachedMethods": Array [
+              "CachedMethods": [
                 "GET",
                 "HEAD",
               ],
               "Compress": true,
-              "ForwardedValues": Object {
-                "Cookies": Object {
+              "ForwardedValues": {
+                "Cookies": {
                   "Forward": "all",
                 },
-                "Headers": Array [
+                "Headers": [
                   "*",
                 ],
                 "QueryString": true,
@@ -550,8 +550,8 @@ Object {
               "TargetOriginId": "origin2",
               "ViewerProtocolPolicy": "redirect-to-https",
             },
-            Object {
-              "AllowedMethods": Array [
+            {
+              "AllowedMethods": [
                 "DELETE",
                 "GET",
                 "HEAD",
@@ -560,16 +560,16 @@ Object {
                 "POST",
                 "PUT",
               ],
-              "CachedMethods": Array [
+              "CachedMethods": [
                 "GET",
                 "HEAD",
               ],
               "Compress": true,
-              "ForwardedValues": Object {
-                "Cookies": Object {
+              "ForwardedValues": {
+                "Cookies": {
                   "Forward": "all",
                 },
-                "Headers": Array [
+                "Headers": [
                   "*",
                 ],
                 "QueryString": true,
@@ -578,8 +578,8 @@ Object {
               "TargetOriginId": "origin2",
               "ViewerProtocolPolicy": "redirect-to-https",
             },
-            Object {
-              "AllowedMethods": Array [
+            {
+              "AllowedMethods": [
                 "DELETE",
                 "GET",
                 "HEAD",
@@ -588,16 +588,16 @@ Object {
                 "POST",
                 "PUT",
               ],
-              "CachedMethods": Array [
+              "CachedMethods": [
                 "GET",
                 "HEAD",
               ],
               "Compress": true,
-              "ForwardedValues": Object {
-                "Cookies": Object {
+              "ForwardedValues": {
+                "Cookies": {
                   "Forward": "all",
                 },
-                "Headers": Array [
+                "Headers": [
                   "*",
                 ],
                 "QueryString": true,
@@ -607,26 +607,26 @@ Object {
               "ViewerProtocolPolicy": "redirect-to-https",
             },
           ],
-          "CustomErrorResponses": Array [
-            Object {
+          "CustomErrorResponses": [
+            {
               "ErrorCachingMinTTL": 0,
               "ErrorCode": 404,
               "ResponseCode": 200,
               "ResponsePagePath": "/index.html",
             },
           ],
-          "DefaultCacheBehavior": Object {
-            "AllowedMethods": Array [
+          "DefaultCacheBehavior": {
+            "AllowedMethods": [
               "GET",
               "HEAD",
             ],
-            "CachedMethods": Array [
+            "CachedMethods": [
               "GET",
               "HEAD",
             ],
             "Compress": true,
-            "ForwardedValues": Object {
-              "Cookies": Object {
+            "ForwardedValues": {
+              "Cookies": {
                 "Forward": "none",
               },
               "QueryString": false,
@@ -638,24 +638,24 @@ Object {
           "Enabled": true,
           "HttpVersion": "http2",
           "IPV6Enabled": true,
-          "Origins": Array [
-            Object {
+          "Origins": [
+            {
               "ConnectionAttempts": 3,
               "ConnectionTimeout": 10,
-              "DomainName": Object {
-                "Fn::GetAtt": Array [
+              "DomainName": {
+                "Fn::GetAtt": [
                   "MyTestStackfrontendMyTestStackfrontendbucket32024486",
                   "RegionalDomainName",
                 ],
               },
               "Id": "origin1",
-              "S3OriginConfig": Object {
-                "OriginAccessIdentity": Object {
-                  "Fn::Join": Array [
+              "S3OriginConfig": {
+                "OriginAccessIdentity": {
+                  "Fn::Join": [
                     "",
-                    Array [
+                    [
                       "origin-access-identity/cloudfront/",
-                      Object {
+                      {
                         "Ref": "MyTestStackfrontendMyTestStackfrontendoriginaccessidentityCBE7DCDB",
                       },
                     ],
@@ -663,16 +663,16 @@ Object {
                 },
               },
             },
-            Object {
+            {
               "ConnectionAttempts": 3,
               "ConnectionTimeout": 10,
-              "CustomOriginConfig": Object {
+              "CustomOriginConfig": {
                 "HTTPPort": 80,
                 "HTTPSPort": 443,
                 "OriginKeepaliveTimeout": 60,
                 "OriginProtocolPolicy": "https-only",
                 "OriginReadTimeout": 60,
-                "OriginSSLProtocols": Array [
+                "OriginSSLProtocols": [
                   "TLSv1.2",
                 ],
               },
@@ -681,9 +681,9 @@ Object {
             },
           ],
           "PriceClass": "PriceClass_100",
-          "ViewerCertificate": Object {
-            "AcmCertificateArn": Object {
-              "Fn::GetAtt": Array [
+          "ViewerCertificate": {
+            "AcmCertificateArn": {
+              "Fn::GetAtt": [
                 "MyTestStackfrontendMyTestStackfrontendcertificateCertificateRequestorResourceBC6C0DEA",
                 "Arn",
               ],
@@ -695,31 +695,31 @@ Object {
       },
       "Type": "AWS::CloudFront::Distribution",
     },
-    "MyTestStackfrontendMyTestStackfrontendoriginaccessidentityCBE7DCDB": Object {
-      "Properties": Object {
-        "CloudFrontOriginAccessIdentityConfig": Object {
+    "MyTestStackfrontendMyTestStackfrontendoriginaccessidentityCBE7DCDB": {
+      "Properties": {
+        "CloudFrontOriginAccessIdentityConfig": {
           "Comment": "Access bucket example.example.com only from Cloudfront",
         },
       },
       "Type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
     },
   },
-  "Rules": Object {
-    "CheckBootstrapVersion": Object {
-      "Assertions": Array [
-        Object {
-          "Assert": Object {
-            "Fn::Not": Array [
-              Object {
-                "Fn::Contains": Array [
-                  Array [
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
                     "1",
                     "2",
                     "3",
                     "4",
                     "5",
                   ],
-                  Object {
+                  {
                     "Ref": "BootstrapVersion",
                   },
                 ],
