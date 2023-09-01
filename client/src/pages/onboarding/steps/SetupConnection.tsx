@@ -63,7 +63,7 @@ export const SetupConnection: React.FC<Props> = ({
       }
     },
     !connectionId || (!isCompleted && connectionId ? true : false),
-    [outOfBandId, connectionId]
+    [outOfBandId, connectionId],
   )
 
   const renderQRCode = invitationUrl ? (

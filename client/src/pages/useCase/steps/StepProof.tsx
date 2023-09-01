@@ -68,7 +68,7 @@ export const StepProof: React.FC<Props> = ({ proof, step, connectionId, requeste
         attributes: proofs,
         predicates: predicates,
         requestOptions: step.requestOptions,
-      })
+      }),
     )
   }
 
@@ -84,7 +84,7 @@ export const StepProof: React.FC<Props> = ({ proof, step, connectionId, requeste
       }
     },
     !proofReceived,
-    [proof]
+    [proof],
   )
 
   const sendNewRequest = () => {

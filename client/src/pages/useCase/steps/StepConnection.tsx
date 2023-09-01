@@ -44,7 +44,7 @@ export const StepConnection: React.FC<Props> = ({ step, connection, entity }) =>
       }
     },
     !id || (!isCompleted && id ? true : false),
-    [outOfBandId, id]
+    [outOfBandId, id],
   )
 
   const renderQRCode = invitationUrl && <QRCode invitationUrl={invitationUrl} connectionState={state} />

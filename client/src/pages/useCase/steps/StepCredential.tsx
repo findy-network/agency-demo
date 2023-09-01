@@ -33,7 +33,7 @@ export const StepCredential: React.FC<Props> = ({ step, connectionId, issueCrede
   const closeFailedRequestModal = () => setIsFailedRequestModalOpen(false)
 
   const credentialsAccepted = Object.values(credentials).every(
-    (x) => x.state === 'credential-issued' || x.state === 'done'
+    (x) => x.state === 'credential-issued' || x.state === 'done',
   )
   const [issuedCredData, setIssuedCredData] = useState<CredentialData[]>([])
 
@@ -71,7 +71,7 @@ export const StepCredential: React.FC<Props> = ({ step, connectionId, issueCrede
       }
     },
     !credentialsAccepted,
-    [connectionId]
+    [connectionId],
   )
 
   const sendNewCredentials = () => {

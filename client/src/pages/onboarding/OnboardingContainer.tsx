@@ -53,7 +53,7 @@ export const OnboardingContainer: React.FC<Props> = ({
 
   const connectionCompleted = connectionState === 'response-sent' || connectionState === 'completed'
   const credentialsAccepted = Object.values(credentials).every(
-    (x) => x.state === 'credential-issued' || x.state === 'done'
+    (x) => x.state === 'credential-issued' || x.state === 'done',
   )
   const isBackDisabled = [Progress.SETUP_START, Progress.ACCEPT_CREDENTIAL].includes(onboardingStep)
   const isForwardDisabled =
