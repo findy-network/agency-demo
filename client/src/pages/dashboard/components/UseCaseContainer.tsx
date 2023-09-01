@@ -37,7 +37,7 @@ export const UseCaseContainer: React.FC<Props> = ({ useCases, completedUseCaseSl
         .map((y) => {
           return y.metadata['_internal/indyCredential']?.credentialDefinitionId
         })
-        .includes(x.credentialDefinitionId)
+        .includes(x.credentialDefinitionId),
     )
 
     const isCompleted = completedUseCaseSlugs.includes(item.slug)

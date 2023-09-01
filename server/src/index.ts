@@ -123,7 +123,7 @@ const run = async () => {
     {
       protocolClient,
       retryOnError: true,
-    }
+    },
   )
 
   const app: Express = createExpressServer({

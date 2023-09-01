@@ -24,5 +24,5 @@ export const createInvitation = createAsyncThunk(
       : await Api.createOobInvitation(entity?.name, entity?.imageUrl)
 
     return response.data
-  }
+  },
 )

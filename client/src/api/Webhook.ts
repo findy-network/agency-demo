@@ -15,7 +15,7 @@ export function useWebhookEvent(
   eventType: string,
   callback: (event: Event) => void,
   isEnabled = true,
-  dependencies: unknown[] = []
+  dependencies: unknown[] = [],
 ): void {
   useEffect(() => {
     const onEvent = (event: { data: string }) => {

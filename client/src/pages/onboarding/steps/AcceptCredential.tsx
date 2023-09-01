@@ -42,7 +42,7 @@ export const AcceptCredential: React.FC<Props> = ({ content, connectionId, crede
   const closeFailedRequestModal = () => setIsFailedRequestModalOpen(false)
 
   const credentialsAccepted = Object.values(credentials).every(
-    (x) => x.state === 'credential-issued' || x.state === 'done'
+    (x) => x.state === 'credential-issued' || x.state === 'done',
   )
 
   useEffect(() => {
@@ -57,7 +57,7 @@ export const AcceptCredential: React.FC<Props> = ({ content, connectionId, crede
   const handleCredentialTimeout = () => {
     if (!isIssueCredentialLoading || !error) return
     setErrorMsg(
-      `The request timed out. We're sorry, but you're going to have to restart the demo. If this issue persists, please contact us.`
+      `The request timed out. We're sorry, but you're going to have to restart the demo. If this issue persists, please contact us.`,
     )
     setIsRejectedModalOpen(true)
   }
@@ -74,7 +74,7 @@ export const AcceptCredential: React.FC<Props> = ({ content, connectionId, crede
     if (error) {
       const msg = error.message ?? 'Issue Credential Error'
       setErrorMsg(
-        `The request has failed with the following error: ${msg}. We're sorry, but you're going to have to restart. If this issue persists, please contact us. `
+        `The request has failed with the following error: ${msg}. We're sorry, but you're going to have to restart. If this issue persists, please contact us. `,
       )
       setIsRejectedModalOpen(true)
     }
@@ -88,7 +88,7 @@ export const AcceptCredential: React.FC<Props> = ({ content, connectionId, crede
       }
     },
     !credentialsAccepted,
-    [connectionId]
+    [connectionId],
   )
 
   const routeError = () => {

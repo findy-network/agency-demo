@@ -65,7 +65,7 @@ export const StepProofOOB: React.FC<Props> = ({ proof, proofUrl, step, requested
         attributes: proofs,
         predicates: predicates,
         requestOptions: step.requestOptions,
-      })
+      }),
     )
   }
 
@@ -81,7 +81,7 @@ export const StepProofOOB: React.FC<Props> = ({ proof, proofUrl, step, requested
       }
     },
     !proofReceived,
-    [proof]
+    [proof],
   )
 
   // TODO
