@@ -3909,7 +3909,7 @@ cli-truncate@^2.1.0:
     string-width "^4.2.0"
 
 "client@file:/home/runner/work/agency-demo/agency-demo/client":
-  version "0.1.28"
+  version "0.1.29"
   resolved "file:client"
   dependencies:
     "@reduxjs/toolkit" "^1.9.3"
@@ -10540,7 +10540,7 @@ serve-static@1.15.0:
     send "0.18.0"
 
 "server@file:/home/runner/work/agency-demo/agency-demo/server":
-  version "0.1.28"
+  version "0.1.29"
   resolved "file:server"
   dependencies:
     "@findy-network/findy-common-ts" "^0.3.1"
