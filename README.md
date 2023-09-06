@@ -26,7 +26,7 @@ in the first place!
 
 ### Prerequisites
 
-- [NodeJS](https://nodejs.org/en/) v16.X.X - Other versions may work, not tested
+- [NodeJS](https://nodejs.org/en/)
 - [Yarn](https://classic.yarnpkg.com/en/docs/install)
 - [Git](https://git-scm.com/downloads) - You probably already have this
 

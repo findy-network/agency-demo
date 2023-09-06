@@ -1,4 +1,4 @@
-FROM node:16.18-alpine3.16 as build
+FROM node:18.17-alpine3.18 as build
 
 WORKDIR /usr/src/app
 
@@ -17,13 +17,13 @@ RUN yarn server:build
 
 # TODO: yarn not handling binaries properly, so install findy-common-ts separately
 RUN apk update && apk add curl && \
-    curl https://raw.githubusercontent.com/findy-network/findy-agent-cli/HEAD/install.sh > install.sh && \
-    chmod a+x install.sh && \
-    ./install.sh -b /bin && \
-    mv /bin/findy-agent-cli /bin/findy-common-ts
+  curl https://raw.githubusercontent.com/findy-network/findy-agent-cli/HEAD/install.sh > install.sh && \
+  chmod a+x install.sh && \
+  ./install.sh -b /bin && \
+  mv /bin/findy-agent-cli /bin/findy-common-ts
 
 
-FROM node:16.18-alpine3.16
+FROM node:18.17-alpine3.18
 
 WORKDIR /usr/src/app
 

@@ -15,7 +15,7 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version: '16.x'
+          node-version: '18.x'
 
       - name: Install dependencies
         run: yarn install
@@ -40,7 +40,7 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version: '16.x'
+          node-version: '18.x'
 
       - name: Run infra tests
         run: |
@@ -60,7 +60,7 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version: '16.x'
+          node-version: '18.x'
 
       - name: Start env
         run: |
