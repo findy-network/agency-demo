@@ -7,7 +7,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",
     "axios": "^1.5.0",
-    "framer-motion": "^10.16.3",
+    "framer-motion": "^10.16.4",
     "js-base64": "^3.7.5",
     "kbar": "0.1.0-beta.43",
     "qrcode.react": "^3.1.0",
