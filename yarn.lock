@@ -1386,10 +1386,10 @@
   resolved "https://registry.npmjs.org/@eslint/js/-/js-8.49.0.tgz"
   integrity sha512-1S8uAY/MTJqVx0SC4epBq+N2yhuwtNwLbJYNZyhL2pO1ZVKn5HFXav5T41Ryzy9K9V7ZId2JB2oy/W4aCd9/2w==
 
-"@findy-network/findy-common-ts@^0.3.1":
-  version "0.3.1"
-  resolved "https://registry.npmjs.org/@findy-network/findy-common-ts/-/findy-common-ts-0.3.1.tgz"
-  integrity sha512-3LNIxJrOgjn0JqwbI9ewpb6nhNEh+1yL8JmYv1xrVeMV/FD9NBawpq0jgwHpfCxzH9Z2y0BNf3sW9hN0LEbzgg==
+"@findy-network/findy-common-ts@^0.3.2":
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/@findy-network/findy-common-ts/-/findy-common-ts-0.3.2.tgz#946a331a1141ba5b2dae8262bbd68e9088b85931"
+  integrity sha512-qEtWSFkOxZ7Ff96zm3SlLACwhjfljstN0S3z1f8yXp3j8v/BYNL48tu+OEtu86ZZ5mtJ3GiATnKNOQMSFpHs/w==
   dependencies:
     "@grpc/grpc-js" "^1.7.1"
     "@mapbox/node-pre-gyp" "^1.0.10"
