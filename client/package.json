@@ -6,7 +6,7 @@
   "description": "Findy Agency - Verifiable Credential Demo",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.6",
-    "axios": "^1.5.0",
+    "axios": "^1.5.1",
     "framer-motion": "^10.16.4",
     "js-base64": "^3.7.5",
     "kbar": "0.1.0-beta.43",
