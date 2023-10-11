@@ -14,7 +14,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@findy-network/findy-common-ts": "^0.3.4",
-    "@types/express": "^4.17.18",
+    "@types/express": "^4.17.19",
     "@types/uuid": "^9.0.5",
     "@types/ws": "^8.5.7",
     "class-transformer": "^0.5.1",
