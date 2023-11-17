@@ -1392,10 +1392,10 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.53.0.tgz#bea56f2ed2b5baea164348ff4d5a879f6f81f20d"
   integrity sha512-Kn7K8dx/5U6+cT1yEhpX1w4PCSg0M+XyRILPgvwcEBjerFWCwQj5sbr3/VmxqV0JGHCBCzyd6LxypEuehypY1w==
 
-"@findy-network/findy-common-ts@^0.3.5":
-  version "0.3.5"
-  resolved "https://registry.yarnpkg.com/@findy-network/findy-common-ts/-/findy-common-ts-0.3.5.tgz#17405dfe601e83b0b301f3c468a81c6c9d22d4b0"
-  integrity sha512-sIf4ZGgEA0lRi31JdTvUP8pUqcM61rOox35dvUg0ubbwC2L8hw89Yl8GiHqUXnLe8YTUCnzUf7xZrvpa6lyKqw==
+"@findy-network/findy-common-ts@^0.3.6":
+  version "0.3.6"
+  resolved "https://registry.yarnpkg.com/@findy-network/findy-common-ts/-/findy-common-ts-0.3.6.tgz#aef7ffdc04588c9b1b60a742f603262bfa41caf6"
+  integrity sha512-El2Cb08f4Oc+T34lXeYNz43+cA9ikne2xbto1uLUdmOrEx7w/QBmfyXgE8II3xlKeGLbLfCs4dCkemT0FqAvTQ==
   dependencies:
     "@grpc/grpc-js" "^1.7.1"
     "@mapbox/node-pre-gyp" "^1.0.10"
@@ -7694,10 +7694,10 @@ jws@^3.2.2:
     jwa "^1.4.1"
     safe-buffer "^5.0.1"
 
-kbar@0.1.0-beta.43:
-  version "0.1.0-beta.43"
-  resolved "https://registry.npmjs.org/kbar/-/kbar-0.1.0-beta.43.tgz"
-  integrity sha512-MmhhvGuZfmA616X9wuy/iaWCPFmlEi6kGkvce/7GlatWmCSkHZhD8glxUruFUpxSN0HZvW/6e/jvSgpRGnC76w==
+kbar@0.1.0-beta.44:
+  version "0.1.0-beta.44"
+  resolved "https://registry.yarnpkg.com/kbar/-/kbar-0.1.0-beta.44.tgz#bfd7d7de99a70d6c294c98b2937e3244969112df"
+  integrity sha512-hfstBZn/XYhEEobxA6yhMkgu3yHNqAgHbBM/WavC1GvSEMRAVMZAWZBBrNwJCqknSIwu7nS9jsHORENtlrjU1Q==
   dependencies:
     "@radix-ui/react-portal" "^1.0.1"
     fast-equals "^2.0.3"
