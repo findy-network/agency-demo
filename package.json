@@ -31,7 +31,7 @@
     "licenses:check": "node ./tools/check-licenses.js "
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
     "@typescript-eslint/parser": "^6.13.2",
     "@typescript-eslint/visitor-keys": "^6.7.4",
     "concurrently": "^8.2.2",
